@@ -1,0 +1,31 @@
+/* @import './base.css'; */
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  font-weight: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+textarea,
+button,
+select {
+  border: none;
+  outline: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
