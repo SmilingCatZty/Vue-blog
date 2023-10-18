@@ -29,3 +29,11 @@ main {
   flex-direction: column;
   width: 100%;
 }
+
+ul {
+  width: 100%;
+  list-style: none;
+}
+li {
+  width: 100%;
+}
