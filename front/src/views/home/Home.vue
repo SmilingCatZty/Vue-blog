@@ -53,7 +53,7 @@ const blogs = ref<any>({
 
 <template>
   <div class="home">
-    <header class="home-header">
+    <header class="home-header bg-gray-500">
       <div class="header-imgs">
         <ul>
           <li
@@ -61,8 +61,8 @@ const blogs = ref<any>({
             :key="index"
             :style="{
               backgroundImage: `url(${img})`,
-              animationDelay: `${index * 5}s`,
-              animationDuration: `${5 * imgList.length}s`
+              animationDelay: `${5 * index}s`,
+              animationDuration: `${10 * imgList.length}s`
             }"
           />
         </ul>
@@ -113,7 +113,7 @@ const blogs = ref<any>({
         </div>
         <!-- 主体右侧 -->
         <div class="card bg-slate-400 main-right">
-          <div class="right-user bg-gray-100 card shadow-lg">
+          <div class="right-user bg-gray-100 card shadow-lg p-4">
             <div class="user-avatar">
               <img :src="userInfo.avatar" alt="" />
             </div>
@@ -133,14 +133,14 @@ const blogs = ref<any>({
               </div>
             </div>
           </div>
-          <div class="right-notice bg-gray-100 card shadow-lg mt-3">
+          <div class="right-notice bg-gray-100 card shadow-lg mt-3 p-4">
             <div class="notice-title">公告</div>
             <div class="notice-content mt-2">
               <span>后端基于Nest开发,前端基于Vue3+Ts+daisyUI+ElementPlus开发</span>
             </div>
           </div>
           <div class="right-chat bg-gray-100 card shadow-lg"></div>
-          <div class="right-website bg-gray-100 card shadow-lg mt-3">
+          <div class="right-website bg-gray-100 card shadow-lg mt-3 p-4">
             <div class="website-title">网站咨询</div>
             <div class="website-online website-item mt-2">
               <span>在线人数</span>
@@ -190,8 +190,9 @@ const blogs = ref<any>({
         background-repeat: no-repeat;
         background-size: cover;
         animation-name: home-img_swipper;
-        animation-timing-function: linear;
         animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         backface-visibility: hidden;
         transform-style: preserve-3d;
       }
@@ -293,7 +294,6 @@ const blogs = ref<any>({
 
       .right-user {
         width: 100%;
-        padding: 16px;
         .user-avatar {
           display: flex;
           justify-content: center;
@@ -328,7 +328,6 @@ const blogs = ref<any>({
       }
       .right-notice {
         width: 100%;
-        padding: 16px;
         .notice-title {
           font-size: 20px;
           font-weight: 500;
@@ -342,14 +341,13 @@ const blogs = ref<any>({
       }
       .right-website {
         width: 100%;
-        padding: 16px;
 
-        .website-title{
+        .website-title {
           font-size: 20px;
           font-weight: 500;
         }
 
-        .website-item{
+        .website-item {
           display: flex;
           justify-content: space-between;
         }

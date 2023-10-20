@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+import Header from '@/components/layout/Header.comp.vue'
 
 const route = useRoute()
 </script>
 
 <template>
   <div class="app-wrapper">
+    <Header v-show="route.path !== '/404'"></Header>
     <main>
       <router-view v-slot="{ Component }">
         <keep-alive>
