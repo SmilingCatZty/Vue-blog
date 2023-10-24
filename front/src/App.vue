@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import Header from '@/components/layout/Header.comp.vue'
+import Footer from '@/components/layout/Footer.comp.vue'
 
 const route = useRoute()
 </script>
@@ -15,6 +16,7 @@ const route = useRoute()
         </keep-alive>
       </router-view>
     </main>
+    <Footer />
   </div>
 </template>
 

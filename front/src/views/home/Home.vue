@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import Waves from '@/components/layout/wave.comp.vue'
 
 // 背景图列表
 const imgList = ref<string[]>([
@@ -15,6 +16,7 @@ const blogList = ref<any[]>([
     type: '日常',
     content:
       '日志1啊日志1日志1啊日志1日志1啊日志1日志1志1啊日日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
+    img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F29%2F20161129152324_LCiUN.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1700701784&t=1a6df5da8f63b8e1f49f84447e3f5e91',
     author: '0422',
     createTime: 123321321321321
   },
@@ -23,6 +25,7 @@ const blogList = ref<any[]>([
     type: '日常',
     content:
       '日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
+    img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201406%2F10%2F20140610142525_vCrms.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1700701833&t=4cde503e7b0f34dfe0d0e53dc3550421',
     author: '0423',
     createTime: 123321321321321
   },
@@ -31,6 +34,7 @@ const blogList = ref<any[]>([
     type: '日常',
     content:
       '日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
+    img: 'https://pica.zhimg.com/v2-e034491c1f5c519df0a6197c5ca58c40_r.jpg?source=1940ef5c',
     author: '0424',
     createTime: 123321321321321
   }
@@ -68,8 +72,9 @@ const blogs = ref<any>({
         </ul>
       </div>
       <div class="header-title">
-        <h1 class="text-4xl">Smiling Cat Blog</h1>
+        <h1 class="text-8xl font-bold text-center text-white">Smiling Cat Blog</h1>
       </div>
+      <Waves />
     </header>
     <main class="home-main bg-slate-50">
       <div class="main-content">
@@ -81,7 +86,7 @@ const blogs = ref<any>({
               v-for="(blog, index) in blogList"
               :key="index"
             >
-              <div class="blog-contain">
+              <article class="blog-contain">
                 <div
                   class="blog-left"
                   :style="{
@@ -92,7 +97,7 @@ const blogs = ref<any>({
                         : `polygon(0 0%,100% 0%,100% 100%,8% 100%)`
                   }"
                 >
-                  <img src="" alt="" class="blog-img border" />
+                  <img :src="blog.img" alt="" class="blog-img border object-cover" />
                 </div>
                 <div class="blog-right">
                   <div class="content-top" style="{}">
@@ -107,15 +112,16 @@ const blogs = ref<any>({
                     <span>{{ blog.author }}</span>
                   </div>
                 </div>
-              </div>
+              </article>
             </li>
           </ul>
+          <div class="text-center w-full p-2">加载更多...</div>
         </div>
         <!-- 主体右侧 -->
-        <div class="card bg-slate-400 main-right">
-          <div class="right-user bg-gray-100 card shadow-lg p-4">
+        <div class="card bg-grey-50 main-right">
+          <div class="right-user bg-blue-100 card shadow-lg p-4">
             <div class="user-avatar">
-              <img :src="userInfo.avatar" alt="" />
+              <img src="/src/assets/image/smilingSun.jpeg" alt="" />
             </div>
             <div class="user-name mt-2">{{ userInfo.userName }}</div>
             <div class="user-content mt-2">
@@ -133,14 +139,14 @@ const blogs = ref<any>({
               </div>
             </div>
           </div>
-          <div class="right-notice bg-gray-100 card shadow-lg mt-3 p-4">
+          <div class="right-notice bg-blue-100 card shadow-lg mt-3 p-4">
             <div class="notice-title">公告</div>
             <div class="notice-content mt-2">
               <span>后端基于Nest开发,前端基于Vue3+Ts+daisyUI+ElementPlus开发</span>
             </div>
           </div>
-          <div class="right-chat bg-gray-100 card shadow-lg"></div>
-          <div class="right-website bg-gray-100 card shadow-lg mt-3 p-4">
+          <div class="right-chat bg-blue-100 card shadow-lg"></div>
+          <div class="right-website bg-blue-100 card shadow-lg mt-3 p-4">
             <div class="website-title">网站咨询</div>
             <div class="website-online website-item mt-2">
               <span>在线人数</span>
@@ -163,6 +169,12 @@ const blogs = ref<any>({
 </template>
 
 <style lang="scss" scoped>
+@font-face {
+  font-family: 'Rainbow-Party-2';
+  src: url('@/assets/font/Rainbow-Party-2.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 .home {
   margin: 0;
   padding: 0;
@@ -200,6 +212,7 @@ const blogs = ref<any>({
   }
 
   .header-title {
+    font-family: Rainbow-Party-2;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -214,11 +227,15 @@ const blogs = ref<any>({
 
   .main-content {
     display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     width: 85%;
 
     .main-left {
-      width: 70%;
+      width: 75%;
       display: flex;
+      flex-wrap: wrap;
 
       .left-blog {
         width: 100%;
@@ -237,6 +254,7 @@ const blogs = ref<any>({
               width: 100%;
               height: 100%;
               background-color: #ccc;
+              transition: all .2s ease-in-out 0s;
             }
           }
 
@@ -281,6 +299,11 @@ const blogs = ref<any>({
             }
           }
         }
+        .blog-contain:hover img{
+          // transform: scale(2);
+          // transform: rotateZ(10deg);
+          animation: .5s blog-img_rotate;
+        }
       }
     }
 
@@ -290,7 +313,7 @@ const blogs = ref<any>({
       top: 20px;
       align-items: flex-start;
       width: 25%;
-      margin: 0 auto;
+      margin-left: 20px;
 
       .right-user {
         width: 100%;
@@ -380,5 +403,17 @@ const blogs = ref<any>({
   100% {
     opacity: 0;
   }
+}
+
+@keyframes blog-img_rotate {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+}
+
+100% {
+    opacity: 1;
+    transform: translateY(0);
+}
 }
 </style>
