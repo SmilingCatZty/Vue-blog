@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute()
+const router = useRouter()
 
 const showHeader = ref<boolean>(true)
 const navHeader = ref<any>(null)
@@ -55,6 +59,10 @@ const handleScroll = (): void => {
   navTop.value = currentScrollPosition
 }
 
+const navClickHandle = () => {
+  router.push('/article')
+}
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
@@ -63,14 +71,19 @@ onMounted(() => {
 <template>
   <div
     ref="navHeader"
-    class="header h-16 w-full flex fixed z-10"
+    class="header h-16 w-full flex fixed z-10 bg-black bg-opacity-10"
     :class="showHeader ? 'nav-show' : 'nav-hide'"
   >
     <div class="header-left h-full flex px-5">
       <div>Smiling cat</div>
     </div>
     <div class="header-center flex flex-1 justify-center items-center">
-      <div class="items-center flex p-2" v-for="(nav, index) in navList" :key="index">
+      <div
+        class="items-center flex p-2 cursor-pointer"
+        v-for="(nav, index) in navList"
+        :key="index"
+        @click="navClickHandle"
+      >
         <div class="center-icon w-6 h-6 bg-red-100"></div>
         <div class="center-title mx-1">{{ nav.title }}</div>
       </div>
@@ -139,26 +152,30 @@ onMounted(() => {
   box-sizing: border-box;
   justify-content: space-between;
   padding: 0.25rem;
-  // transition: all 0.5s;
   transition: 0.4s ease-in-out;
 
   .header-left {
     font-size: 26px;
     align-items: center;
   }
+
   .header-center {
     .items-center {
       border-radius: 15px;
     }
+
     .items-center:hover {
       background-color: rgba($color: #000000, $alpha: 0.1);
     }
+
     .center-title {
       font-size: 16px;
     }
   }
+
   .header-right {
     align-items: center;
+
     .right-item {
       display: flex;
       justify-content: center;
@@ -166,9 +183,11 @@ onMounted(() => {
     }
   }
 }
+
 .nav-show {
   transform: translateY(0);
 }
+
 .nav-hide {
   transform: translateY(-100%);
 }

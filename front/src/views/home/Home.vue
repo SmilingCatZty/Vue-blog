@@ -1,6 +1,9 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Waves from '@/components/layout/wave.comp.vue'
+
+let isFixed = ref<boolean>(false) // 右侧栏围是否为固定定位
+const homeMainRef = ref<any>(null)
 
 // 背景图列表
 const imgList = ref<string[]>([
@@ -40,6 +43,19 @@ const blogList = ref<any[]>([
   }
 ])
 
+// 置顶文章
+const topBlog = ref<any[]>([
+  {
+    title: '我是顶部文章1',
+    type: '日常',
+    content:
+      '顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...',
+    img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F29%2F20161129152324_LCiUN.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1700701784&t=1a6df5da8f63b8e1f49f84447e3f5e91',
+    author: '0422',
+    createTime: 123321321321321
+  }
+])
+
 // 用户信息
 const userInfo = ref<any>({
   userName: 'zty',
@@ -53,10 +69,21 @@ const blogs = ref<any>({
   icon: 8,
   said: 1
 })
+
+const handleScroll = () => {
+  const heightFromTop = homeMainRef.value.getBoundingClientRect()
+  console.log(heightFromTop)
+
+  isFixed.value = heightFromTop.top <= 0 ? true : false
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
-  <div class="home">
+  <div class="home" ref="homeRef">
     <header class="home-header bg-gray-500">
       <div class="header-imgs">
         <ul>
@@ -65,7 +92,7 @@ const blogs = ref<any>({
             :key="index"
             :style="{
               backgroundImage: `url(${img})`,
-              animationDelay: `${5 * index}s`,
+              animationDelay: index === 0 ? '0s' : `${5 * index}s`,
               animationDuration: `${10 * imgList.length}s`
             }"
           />
@@ -76,95 +103,141 @@ const blogs = ref<any>({
       </div>
       <Waves />
     </header>
-    <main class="home-main bg-slate-50">
+    <main ref="homeMainRef" class="home-main bg-slate-50">
       <div class="main-content">
         <!-- 主体左侧 -->
         <div class="main-left">
-          <ul>
-            <li
-              class="left-blog card mt-4 shadow-lg bg-white"
-              v-for="(blog, index) in blogList"
-              :key="index"
-            >
-              <article class="blog-contain">
-                <div
-                  class="blog-left"
-                  :style="{
-                    order: index % 2 == 0 ? 0 : 1,
-                    WebkitClipPath:
-                      index % 2 == 0
-                        ? `polygon(0 0, 92% 0%, 100% 100%, 0% 100%)`
-                        : `polygon(0 0%,100% 0%,100% 100%,8% 100%)`
-                  }"
+          <div class="left-box">
+            <h2>置顶文章</h2>
+            <div>
+              <ul>
+                <li
+                  class="left-blog card mt-4 shadow-lg hover:shadow-2xl bg-white"
+                  v-for="(blog, index) in topBlog"
+                  :key="index"
                 >
-                  <img :src="blog.img" alt="" class="blog-img border object-cover" />
-                </div>
-                <div class="blog-right">
-                  <div class="content-top" style="{}">
-                    <span>{{ blog.createTime }}</span>
-                    <span>{{ blog.type }}</span>
+                  <article class="blog-contain cursor-pointer">
+                    <div
+                      class="blog-left"
+                      :style="{
+                        order: index % 2 == 0 ? 0 : 1,
+                        WebkitClipPath:
+                          index % 2 == 0
+                            ? `polygon(0 0, 92% 0%, 100% 100%, 0% 100%)`
+                            : `polygon(0 0%,100% 0%,100% 100%,8% 100%)`
+                      }"
+                    >
+                      <img :src="blog.img" alt="" class="blog-img border object-cover" />
+                    </div>
+                    <div class="blog-right">
+                      <div class="content-top" style="{}">
+                        <span>{{ blog.createTime }}</span>
+                        <span>{{ blog.type }}</span>
+                      </div>
+                      <div class="content-main">
+                        <span class="content-main_title">{{ blog.title }}</span>
+                        <span class="content-main_text">{{ blog.content }}</span>
+                      </div>
+                      <div class="content-bottom">
+                        <span>{{ blog.author }}</span>
+                      </div>
+                    </div>
+                  </article>
+                </li>
+              </ul>
+            </div>
+            <h2>文章列表</h2>
+            <!-- 文章列表 -->
+            <ul>
+              <li
+                class="left-blog card mt-4 shadow-lg hover:shadow-2xl bg-white"
+                v-for="(blog, index) in blogList"
+                :key="index"
+              >
+                <article class="blog-contain cursor-pointer">
+                  <div
+                    class="blog-left"
+                    :style="{
+                      order: index % 2 == 0 ? 0 : 1,
+                      WebkitClipPath:
+                        index % 2 == 0
+                          ? `polygon(0 0, 92% 0%, 100% 100%, 0% 100%)`
+                          : `polygon(0 0%,100% 0%,100% 100%,8% 100%)`
+                    }"
+                  >
+                    <img :src="blog.img" alt="" class="blog-img border object-cover" />
                   </div>
-                  <div class="content-main">
-                    <span class="content-main_title">{{ blog.title }}</span>
-                    <span class="content-main_text">{{ blog.content }}</span>
+                  <div class="blog-right">
+                    <div class="content-top" style="{}">
+                      <span>{{ blog.createTime }}</span>
+                      <span>{{ blog.type }}</span>
+                    </div>
+                    <div class="content-main">
+                      <span class="content-main_title">{{ blog.title }}</span>
+                      <span class="content-main_text">{{ blog.content }}</span>
+                    </div>
+                    <div class="content-bottom">
+                      <span>{{ blog.author }}</span>
+                    </div>
                   </div>
-                  <div class="content-bottom">
-                    <span>{{ blog.author }}</span>
-                  </div>
-                </div>
-              </article>
-            </li>
-          </ul>
+                </article>
+              </li>
+            </ul>
+          </div>
           <div class="text-center w-full p-2">加载更多...</div>
         </div>
         <!-- 主体右侧 -->
-        <div class="card bg-grey-50 main-right">
-          <div class="right-user bg-blue-100 card shadow-lg p-4">
-            <div class="user-avatar">
-              <img src="/src/assets/image/smilingSun.jpeg" alt="" />
-            </div>
-            <div class="user-name mt-2">{{ userInfo.userName }}</div>
-            <div class="user-content mt-2">
-              <div class="content-article">
-                <div>{{ blogs.article }}</div>
-                <div>文章</div>
+        <div class="main-right w-1/4 h-auto card bg-grey-50 flex items-start ml-5">
+          <div class="main-right-contain w-full sticky top-5">
+            <div class="right-contain-box">
+              <div class="right-user bg-blue-100 card shadow-lg p-4">
+                <div class="user-avatar">
+                  <img src="/src/assets/image/smilingSun.jpeg" alt="" />
+                </div>
+                <div class="user-name mt-2">{{ userInfo.userName }}</div>
+                <div class="user-content mt-2">
+                  <div class="content-article">
+                    <div>{{ blogs.article }}</div>
+                    <div>文章</div>
+                  </div>
+                  <div class="content-icon">
+                    <div>{{ blogs.icon }}</div>
+                    <div>标签</div>
+                  </div>
+                  <div class="content-said">
+                    <div>{{ blogs.said }}</div>
+                    <div>说说</div>
+                  </div>
+                </div>
               </div>
-              <div class="content-icon">
-                <div>{{ blogs.icon }}</div>
-                <div>标签</div>
+              <div class="right-notice bg-blue-100 card shadow-lg mt-3 p-4">
+                <div class="notice-title">公告</div>
+                <div class="notice-content mt-2">
+                  <span>后端基于Nest开发,前端基于Vue3+Ts+daisyUI+ElementPlus开发</span>
+                </div>
               </div>
-              <div class="content-said">
-                <div>{{ blogs.said }}</div>
-                <div>说说</div>
+              <div class="right-chat bg-blue-100 card shadow-lg"></div>
+              <div class="right-website bg-blue-100 card shadow-lg mt-3 p-4">
+                <div class="website-title">网站咨询</div>
+                <div class="website-online website-item mt-2">
+                  <span>在线人数</span>
+                  <span>1</span>
+                </div>
+                <div class="website-viewer website-item mt-2">
+                  <span>访问量</span>
+                  <span>11</span>
+                </div>
+                <div class="website-time website-item mt-2">
+                  <span>运行时常</span>
+                  <span>111</span>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="right-notice bg-blue-100 card shadow-lg mt-3 p-4">
-            <div class="notice-title">公告</div>
-            <div class="notice-content mt-2">
-              <span>后端基于Nest开发,前端基于Vue3+Ts+daisyUI+ElementPlus开发</span>
-            </div>
-          </div>
-          <div class="right-chat bg-blue-100 card shadow-lg"></div>
-          <div class="right-website bg-blue-100 card shadow-lg mt-3 p-4">
-            <div class="website-title">网站咨询</div>
-            <div class="website-online website-item mt-2">
-              <span>在线人数</span>
-              <span>1</span>
-            </div>
-            <div class="website-viewer website-item mt-2">
-              <span>访问量</span>
-              <span>11</span>
-            </div>
-            <div class="website-time website-item mt-2">
-              <span>运行时常</span>
-              <span>111</span>
             </div>
           </div>
         </div>
       </div>
     </main>
-    <footer class="home"></footer>
+    <footer class="home bg-orange-200"></footer>
   </div>
 </template>
 
@@ -204,7 +277,7 @@ const blogs = ref<any>({
         animation-name: home-img_swipper;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
-        animation-fill-mode: both;
+        // animation-fill-mode: both;
         backface-visibility: hidden;
         transform-style: preserve-3d;
       }
@@ -233,7 +306,7 @@ const blogs = ref<any>({
     width: 85%;
 
     .main-left {
-      width: 75%;
+      width: 70%;
       display: flex;
       flex-wrap: wrap;
 
@@ -254,7 +327,7 @@ const blogs = ref<any>({
               width: 100%;
               height: 100%;
               background-color: #ccc;
-              transition: all .2s ease-in-out 0s;
+              transition: all 0.2s ease-in-out 0s;
             }
           }
 
@@ -299,22 +372,13 @@ const blogs = ref<any>({
             }
           }
         }
-        .blog-contain:hover img{
-          // transform: scale(2);
-          // transform: rotateZ(10deg);
-          animation: .5s blog-img_rotate;
+        .blog-contain:hover img {
+          animation: 1.5s blog-img_rotate;
         }
       }
     }
 
     .main-right {
-      display: flex;
-      position: sticky;
-      top: 20px;
-      align-items: flex-start;
-      width: 25%;
-      margin-left: 20px;
-
       .right-user {
         width: 100%;
         .user-avatar {
@@ -376,6 +440,9 @@ const blogs = ref<any>({
         }
       }
     }
+    .main-right-fixed {
+      position: fixed;
+    }
   }
 }
 
@@ -407,13 +474,13 @@ const blogs = ref<any>({
 
 @keyframes blog-img_rotate {
   0% {
-    opacity: 0;
-    transform: translateY(80px);
-}
-
-100% {
-    opacity: 1;
-    transform: translateY(0);
-}
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
