@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.18",
     "autoprefixer": "^10.4.16",
     "pinia": "^2.1.6",
     "postcss": "^8.4.31",

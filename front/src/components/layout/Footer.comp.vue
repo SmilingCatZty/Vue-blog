@@ -24,9 +24,6 @@ import {} from 'vue'
       flex: 1;
       text-align: center;
     }
-
-    .code {
-    }
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
@@ -59,8 +59,8 @@ const handleScroll = (): void => {
   navTop.value = currentScrollPosition
 }
 
-const navClickHandle = () => {
-  router.push('/article')
+const navClickHandle = (nav: any) => {
+  router.push(`/${nav.path}`)
 }
 
 onMounted(() => {
@@ -82,7 +82,7 @@ onMounted(() => {
         class="items-center flex p-2 cursor-pointer"
         v-for="(nav, index) in navList"
         :key="index"
-        @click="navClickHandle"
+        @click="navClickHandle(nav)"
       >
         <div class="center-icon w-6 h-6 bg-red-100"></div>
         <div class="center-title mx-1">{{ nav.title }}</div>
