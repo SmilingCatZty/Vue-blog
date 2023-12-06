@@ -492,12 +492,12 @@
   resolved "https://registry.npmmirror.com/@vant/icons/-/icons-1.8.0.tgz#36b13f2e628b533f6523a93a168cf02f07056674"
   integrity sha512-sKfEUo2/CkQFuERxvkuF6mGQZDKu3IQdj5rV9Fm0weJXtchDSSQ+zt8qPCNUEhh9Y8shy5PzxbvAfOOkCwlCXg==
 
-"@vant/popperjs@^1.2.1":
+"@vant/popperjs@^1.2.1", "@vant/popperjs@^1.3.0":
   version "1.3.0"
   resolved "https://registry.npmmirror.com/@vant/popperjs/-/popperjs-1.3.0.tgz#e0eff017124b5b2352ef3b36a6df06277f4400f2"
   integrity sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==
 
-"@vant/use@^1.4.2":
+"@vant/use@^1.4.2", "@vant/use@^1.6.0":
   version "1.6.0"
   resolved "https://registry.npmmirror.com/@vant/use/-/use-1.6.0.tgz#237df3091617255519552ca311ffdfea9de59001"
   integrity sha512-PHHxeAASgiOpSmMjceweIrv2AxDZIkWXyaczksMoWvKV2YAYEhoizRuk/xFnKF+emUIi46TsQ+rvlm/t2BBCfA==
@@ -653,6 +653,11 @@
   version "3.3.4"
   resolved "https://registry.npmmirror.com/@vue/shared/-/shared-3.3.4.tgz#06e83c5027f464eef861c329be81454bc8b70780"
   integrity sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==
+
+"@vue/shared@^3.0.0":
+  version "3.3.10"
+  resolved "https://r.cnpmjs.org/@vue/shared/-/shared-3.3.10.tgz#1583a8d85a957d8b819078c465d2a11db7914b2f"
+  integrity sha512-2y3Y2J1a3RhFa0WisHvACJR2ncvWiVHcP8t0Inxo+NKz+8RKO4ZV8eZgCxRgQoA6ITfV12L4E6POOL9HOU5nqw==
 
 "@vue/tsconfig@^0.4.0":
   version "0.4.0"
@@ -811,6 +816,11 @@ assign-symbols@^1.0.0:
   resolved "https://registry.npmmirror.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha512-Q+JC7Whu8HhmTdBph/Tq59IoRtoy6KAm5zzPv00WdujX82lbAL8K7WVjne7vdCsAmbF4AYaDOPyO3k0kl8qIrw==
 
+asynckit@^0.4.0:
+  version "0.4.0"
+  resolved "https://r2.cnpmjs.org/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
+  integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
+
 atob@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmmirror.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
@@ -827,6 +837,15 @@ autoprefixer@^10.4.16:
     normalize-range "^0.1.2"
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
+
+axios@^1.6.2:
+  version "1.6.2"
+  resolved "https://r.cnpmjs.org/axios/-/axios-1.6.2.tgz#de67d42c755b571d3e698df1b6504cde9b0ee9f2"
+  integrity sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==
+  dependencies:
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 balanced-match@^1.0.0:
   version "1.0.2"
@@ -1046,6 +1065,13 @@ colord@^2.9:
   version "2.9.3"
   resolved "https://registry.npmmirror.com/colord/-/colord-2.9.3.tgz#4f8ce919de456f1d5c1c368c307fe20f3e59fb43"
   integrity sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==
+
+combined-stream@^1.0.8:
+  version "1.0.8"
+  resolved "https://r2.cnpmjs.org/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
+  integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
+  dependencies:
+    delayed-stream "~1.0.0"
 
 commander@7:
   version "7.2.0"
@@ -1545,6 +1571,11 @@ delaunator@5:
   dependencies:
     robust-predicates "^3.0.0"
 
+delayed-stream@~1.0.0:
+  version "1.0.0"
+  resolved "https://r2.cnpmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
+  integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
+
 dequal@^2.0.0:
   version "2.0.3"
   resolved "https://registry.npmmirror.com/dequal/-/dequal-2.0.3.tgz#2644214f1997d39ed0ee0ece72335490a7ac67be"
@@ -1964,10 +1995,24 @@ flatted@^3.2.9:
   resolved "https://registry.npmmirror.com/flatted/-/flatted-3.2.9.tgz#7eb4c67ca1ba34232ca9d2d93e9886e611ad7daf"
   integrity sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==
 
+follow-redirects@^1.15.0:
+  version "1.15.3"
+  resolved "https://r.cnpmjs.org/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
+  integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
   integrity sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==
+
+form-data@^4.0.0:
+  version "4.0.0"
+  resolved "https://r2.cnpmjs.org/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+  integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
+    mime-types "^2.1.12"
 
 fraction.js@^4.3.6:
   version "4.3.7"
@@ -2988,6 +3033,18 @@ micromatch@^4.0.4, micromatch@^4.0.5:
     braces "^3.0.2"
     picomatch "^2.3.1"
 
+mime-db@1.52.0:
+  version "1.52.0"
+  resolved "https://r.cnpmjs.org/mime-db/-/mime-db-1.52.0.tgz#bbabcdc02859f4987301c856e3387ce5ec43bf70"
+  integrity sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==
+
+mime-types@^2.1.12:
+  version "2.1.35"
+  resolved "https://r.cnpmjs.org/mime-types/-/mime-types-2.1.35.tgz#381a871b62a734450660ae3deee44813f70d959a"
+  integrity sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==
+  dependencies:
+    mime-db "1.52.0"
+
 mimic-fn@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmmirror.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
@@ -3417,6 +3474,11 @@ prismjs@^1.13.0, prismjs@^1.23.0:
   version "1.29.0"
   resolved "https://registry.npmmirror.com/prismjs/-/prismjs-1.29.0.tgz#f113555a8fa9b57c35e637bba27509dcf802dd12"
   integrity sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==
+
+proxy-from-env@^1.1.0:
+  version "1.1.0"
+  resolved "https://r2.cnpmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
+  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
 punycode@^2.1.0:
   version "2.3.0"
@@ -4063,6 +4125,15 @@ vant@^3.1.3:
     "@vant/icons" "^1.8.0"
     "@vant/popperjs" "^1.2.1"
     "@vant/use" "^1.4.2"
+
+vant@^4.8.0:
+  version "4.8.0"
+  resolved "https://r.cnpmjs.org/vant/-/vant-4.8.0.tgz#46cc6cf77593abb1ccf023629b3f47e15aade1dd"
+  integrity sha512-JeEcSd1zt0+fcSo/wuyvhF+dUdd1IaaJmrG0BTiUvH/XcBJEUaTSSEaYG0V8iI38xUTUCuDG+TSfSoSeEwGVAQ==
+  dependencies:
+    "@vant/popperjs" "^1.3.0"
+    "@vant/use" "^1.6.0"
+    "@vue/shared" "^3.0.0"
 
 vite@^4.4.9:
   version "4.4.11"

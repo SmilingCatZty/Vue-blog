@@ -72,8 +72,6 @@ const blogs = ref<any>({
 
 const handleScroll = () => {
   const heightFromTop = homeMainRef.value.getBoundingClientRect()
-  console.log(heightFromTop)
-
   isFixed.value = heightFromTop.top <= 0 ? true : false
 }
 

@@ -1,10 +1,12 @@
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { Button, Uploader, Toast } from 'vant';
 
 import './assets/css/main.css'
 // tailwindCss
 import './assets/css/tailwind.css'
+import 'vant/lib/index.css';
 
 import VMdEditor from "@kangc/v-md-editor";
 import '@kangc/v-md-editor/lib/style/base-editor.css';
@@ -26,5 +28,8 @@ VMdEditor.use(githubTheme, {
 app.use(createPinia())
 app.use(router)
 app.use(VMdEditor)
+app.use(Button)
+app.use(Uploader)
+app.use(Toast)
 
 app.mount('#app')

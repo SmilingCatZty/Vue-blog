@@ -8,6 +8,15 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  server: {
+    proxy: {
+      '/smiling-cat': {
+        // target: 'http://localhost:5000',
+        target:'http://127.0.0.1:5000',
+        changeOrigin: true,
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

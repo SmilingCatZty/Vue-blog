@@ -1,13 +1,11 @@
 <script lang="ts" setup>
-import {} from 'vue'
+import { } from 'vue'
+import UpLoad from './Upload.comp.vue'
 </script>
 
 <template>
   <div class="footer bg-amber-100">
-    <div class="f">
-      <text class="password">密码</text>
-      <text class="code">dsadsadsadsa</text>
-    </div>
+    <UpLoad></UpLoad>
   </div>
 </template>
 
