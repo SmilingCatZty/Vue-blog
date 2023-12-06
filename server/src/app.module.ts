@@ -6,7 +6,7 @@ import { BlogModule } from './modules/blog/blog.module'
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/vue-blog'),
+    MongooseModule.forRoot('mongodb://localhost:27017/personal-blog'),
     BlogModule
   ],
   controllers: [AppController],

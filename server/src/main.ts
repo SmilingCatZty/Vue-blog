@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors()
   /**
    * @ValidationPipe
    * ValidationPipe 使用了功能强大的 class-validator 包及其声明性验证装饰器。
@@ -13,6 +14,6 @@ async function bootstrap() {
   // 设置路由前缀 ： exclude用于排除路由
   app.setGlobalPrefix('smiling-cat', { exclude: ['view'] });
   // 监听端口
-  await app.listen(9000);
+  await app.listen(5000);
 }
 bootstrap();
