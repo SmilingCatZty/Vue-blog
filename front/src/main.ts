@@ -1,11 +1,12 @@
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { Button, Uploader, Toast } from 'vant';
+import { Button, Uploader, Toast, Step, Steps } from 'vant';
 
 import './assets/css/main.css'
 // tailwindCss
 import './assets/css/tailwind.css'
+// vant
 import 'vant/lib/index.css';
 
 import VMdEditor from "@kangc/v-md-editor";
@@ -21,6 +22,8 @@ import hljs from 'highlight.js';
 
 const app = createApp(App)
 
+const vantArr: any[] = [Button, Uploader, Toast, Step, Steps]
+
 VMdEditor.use(githubTheme, {
   Hljs: hljs,
 });
@@ -28,8 +31,8 @@ VMdEditor.use(githubTheme, {
 app.use(createPinia())
 app.use(router)
 app.use(VMdEditor)
-app.use(Button)
-app.use(Uploader)
-app.use(Toast)
+vantArr.map((comp) => {
+  app.use(comp)
+})
 
 app.mount('#app')
