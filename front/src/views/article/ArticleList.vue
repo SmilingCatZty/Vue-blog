@@ -43,13 +43,16 @@ const categoryView = ({ year, month }: { year?: number; month?: number }) => {
       <Steps>
         <template v-for="(step, idx) in stepsList" :key="idx">
           <StepItem :fontSize="24" :iconSize="14">
-            <span @click="categoryView({ year: step.step })">
+            <span class="cursor-pointer" @click="categoryView({ year: step.step })">
               {{ step.step + '年' }}
             </span>
           </StepItem>
           <template v-for="(s, i) in step.children" :key="i">
             <StepItem :fontSize="16" :iconSize="12">
-              <span @click="categoryView({ year: step.step, month: s.stepItem })">
+              <span
+                class="cursor-pointer"
+                @click="categoryView({ year: step.step, month: s.stepItem })"
+              >
                 {{ s.stepItem + '月' }}
               </span>
               <span class="ml-2 text-slate-400 text-xs">{{ '(' + s.count + ')' }}</span>

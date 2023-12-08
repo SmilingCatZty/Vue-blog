@@ -82,7 +82,7 @@ const categoryView = ({ year, month }: { year?: number; month?: number }) => {
       <Steps>
         <template v-for="(step, idx) in stepsList" :key="idx">
           <StepItem :fontSize="24" :iconSize="14">
-            <span >
+            <span>
               {{ route.params.month + '月' + step.day + '日' }}
             </span>
           </StepItem>
@@ -93,7 +93,7 @@ const categoryView = ({ year, month }: { year?: number; month?: number }) => {
                   {{ dayjs(s.createTime).format('hh:mm') }}
                 </span>
                 <span class="ml-2 text-slate-400 text-xs card">
-                  <article class="flex justify-around p-3  shadow-sm border rounded-lg">
+                  <article class="flex justify-around p-3 shadow-sm border rounded-lg  hover:bg-slate-200 cursor-pointer">
                     <div class="w-16 h-16 bg-slate-500"></div>
                     <div class="flex flex-1 flex-wrap items-baseline pl-2 pr-2">
                       <div class="w-full">

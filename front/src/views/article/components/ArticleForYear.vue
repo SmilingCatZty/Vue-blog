@@ -67,14 +67,14 @@ const categoryView = ({ month, day }: { month?: number; day?: number }) => {
       <Steps>
         <template v-for="(step, idx) in stepsList" :key="idx">
           <StepItem :fontSize="24" :iconSize="14">
-            <span @click="categoryView({ month: step.step })">
+            <span class=" cursor-pointer" @click="categoryView({ month: step.step })">
               {{ step.step + '月' }}
             </span>
           </StepItem>
           <template v-for="(s, i) in step.children" :key="i">
             <StepItem :fontSize="16" :iconSize="12">
               <div class="flex">
-                <div class="flex items-center" :style="{minWidth:'100px'}">
+                <div class="flex items-center" :style="{ minWidth: '100px' }">
                   <span>{{ s.stepItem }}</span>
                   <span class="ml-4 text-slate-400 text-xs">
                     {{ '(' + s.article.length + ')' }}
@@ -82,7 +82,7 @@ const categoryView = ({ month, day }: { month?: number; day?: number }) => {
                 </div>
                 <div class="ml-8">
                   <div
-                    class="hover:text-red-800"
+                    class="hover:text-red-800 cursor-pointer"
                     v-for="(article, index) in s.article"
                     :key="index"
                   >

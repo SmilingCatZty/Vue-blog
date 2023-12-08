@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import {} from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 const props = defineProps({
   fontSize: {
@@ -19,6 +23,16 @@ const props = defineProps({
     default: 'grey'
   }
 })
+
+const categoryView = ({ year, month }: { year?: number; month?: number }) => {
+  if (month) {
+    router.push(`/article/${year}/${month}`)
+  } else if (year) {
+    router.push(`/article/${year}`)
+  } else {
+    router.push('/article')
+  }
+}
 </script>
 
 <template>
@@ -28,7 +42,34 @@ const props = defineProps({
         <div class="line"></div>
         <div class="circle"></div>
       </div>
-      <div class="steps-nav-content text-2xl"></div>
+      <div class="steps-nav-content text-2xl">
+        <span class="cursor-pointer" @click="categoryView({})">
+          {{ route.params.year || route.params.month ? '首页' : '全部' }}
+        </span>
+        <span v-show="!route.params.year && !route.params.month" class="ml-2 text-lg text-gray-400">
+          {{ '当前共有17篇博客' }}
+        </span>
+        <span v-show="route.params.year">
+          <span class="ml-2 mr-2">{{ '>' }}</span>
+          <span
+            class="cursor-pointer"
+            :style="{ color: route.params.month ? 'black' : '#9595ed' }"
+            @click="categoryView({ year: Number(route.params.year) })"
+          >
+            {{ route.params.year + '年' }}
+          </span>
+        </span>
+        <span v-show="route.params.month">
+          <span class="ml-2 mr-2">{{ '>' }}</span>
+          <span
+            class="cursor-pointer"
+            :style="{ color: '#9595ed' }"
+            @click="categoryView({ year: Number(route.params.year), month: Number(route.params.month) })"
+          >
+            {{ route.params.month + '月' }}
+          </span>
+        </span>
+      </div>
     </div>
     <slot></slot>
   </div>
