@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { } from 'vue'
-import UpLoad from './Upload.comp.vue'
+import UpLoad from './UploadFile.comp.vue'
 </script>
 
 <template>
   <div class="footer bg-amber-100">
-    <UpLoad></UpLoad>
+    <!-- <UpLoad></UpLoad> -->
   </div>
 </template>
 
