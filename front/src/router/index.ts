@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: 'home',
+    redirect: 'article-year'
   },
   {
     path: '/home',
@@ -13,7 +13,24 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/article',
     name: 'article',
-    component: () => import('@/views/article/Article.vue')
+    component: () => import('@/views/article/ArticleList.vue'),
+    children: []
+  },
+  {
+    path: '/article/:year',
+    name: 'article-year',
+    component: () => import('@/views/article/components/ArticleForYear.vue'),
+    children: []
+  },
+  {
+    path: '/article/:year/:month',
+    name: 'article-month',
+    component: () => import('@/views/article/components/ArticleForMonth.vue')
+  },
+  {
+    path: '/article-detail',
+    name: 'article-detail',
+    component: () => import('@/views/article/ArticleDetail.vue')
   }
 ]
 
