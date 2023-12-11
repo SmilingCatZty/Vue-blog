@@ -8,7 +8,7 @@ const upload = async () => {
   // const res = await blogApi.uploadBlog()
 }
 
-const emit = defineEmits(['ParsingSuccess'])
+const emit = defineEmits(['parsingSuccess'])
 
 const test = () => {
   upload()
@@ -28,8 +28,8 @@ const afterRead: UploaderAfterRead = async (file: any) => {
   const reader = new FileReader()
   reader.readAsText(file.file) // 以文本格式读取文件内容
   reader.onload = () => {
-    console.log(reader) // 输出文件内容
-    emit('ParsingSuccess', reader.result)
+    // console.log(reader) // 输出文件内容
+    emit('parsingSuccess', reader.result)
   }
 }
 </script>

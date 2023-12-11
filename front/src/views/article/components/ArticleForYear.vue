@@ -8,8 +8,7 @@ import StepItem from '@/components/layout/StepItem.comp.vue'
 const router = useRouter()
 const route = useRoute()
 
-const articleImage: string =
-  'http://43.138.109.120:9000/avatar/765664a8a75211296a9cd89671d6d660.png'
+const articleImage: string = 'http://43.138.109.120:9000/avatar/765664a8a75211296a9cd89671d6d660.png'
 
 const stepsList = [
   {
@@ -59,6 +58,11 @@ const stepsList = [
 const categoryView = ({ month, day }: { month?: number; day?: number }) => {
   router.push(`${route.params.year}/${month}`)
 }
+
+// 查看博客详情
+const viewDetail = (blog_id: string) => {
+  router.push(`/article-detail/${blog_id}`)
+}
 </script>
 
 <template>
@@ -67,7 +71,7 @@ const categoryView = ({ month, day }: { month?: number; day?: number }) => {
       <Steps>
         <template v-for="(step, idx) in stepsList" :key="idx">
           <StepItem :fontSize="24" :iconSize="14">
-            <span class=" cursor-pointer" @click="categoryView({ month: step.step })">
+            <span class="cursor-pointer" @click="categoryView({ month: step.step })">
               {{ step.step + '月' }}
             </span>
           </StepItem>
@@ -85,6 +89,7 @@ const categoryView = ({ month, day }: { month?: number; day?: number }) => {
                     class="hover:text-red-800 cursor-pointer"
                     v-for="(article, index) in s.article"
                     :key="index"
+                    @click="viewDetail(article.blog_id)"
                   >
                     {{ article.title }}
                   </div>

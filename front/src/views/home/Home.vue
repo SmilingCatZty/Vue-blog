@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import Waves from '@/components/layout/wave.comp.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 let isFixed = ref<boolean>(false) // 右侧栏围是否为固定定位
 const homeMainRef = ref<any>(null)
@@ -59,8 +62,7 @@ const topBlog = ref<any[]>([
 // 用户信息
 const userInfo = ref<any>({
   userName: 'zty',
-  avatar:
-    'https://i0.hdslb.com/bfs/face/5b7c5ee50f5a2fe2f76d7ed8090048e720a73753.jpg@120w_120h_1c.avif'
+  avatar: 'https://i0.hdslb.com/bfs/face/5b7c5ee50f5a2fe2f76d7ed8090048e720a73753.jpg@120w_120h_1c.avif'
 })
 
 // 日志
@@ -73,6 +75,10 @@ const blogs = ref<any>({
 const handleScroll = () => {
   const heightFromTop = homeMainRef.value.getBoundingClientRect()
   isFixed.value = heightFromTop.top <= 0 ? true : false
+}
+
+const viewDetail = (blog_id: string) => {
+  router.push(`/article-detail/${blog_id}`)
 }
 
 onMounted(() => {
@@ -114,7 +120,7 @@ onMounted(() => {
                   v-for="(blog, index) in topBlog"
                   :key="index"
                 >
-                  <article class="blog-contain cursor-pointer">
+                  <article class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
                     <div
                       class="blog-left"
                       :style="{
@@ -152,7 +158,7 @@ onMounted(() => {
                 v-for="(blog, index) in blogList"
                 :key="index"
               >
-                <article class="blog-contain cursor-pointer">
+                <article class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
                   <div
                     class="blog-left"
                     :style="{

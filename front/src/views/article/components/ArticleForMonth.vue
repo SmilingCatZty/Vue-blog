@@ -9,8 +9,7 @@ import dayjs from 'dayjs'
 const router = useRouter()
 const route = useRoute()
 
-const articleImage: string =
-  'http://43.138.109.120:9000/avatar/765664a8a75211296a9cd89671d6d660.png'
+const articleImage: string = 'http://43.138.109.120:9000/avatar/765664a8a75211296a9cd89671d6d660.png'
 
 const stepsList = ref<any[]>([
   {
@@ -18,6 +17,7 @@ const stepsList = ref<any[]>([
     Articlelist: [
       {
         title: '我是日志3',
+        blog_id: '11',
         type: '日常',
         content:
           '日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
@@ -27,6 +27,7 @@ const stepsList = ref<any[]>([
       },
       {
         title: '我是日志1',
+        blog_id: '12',
         type: '日常',
         content:
           '日志1啊日志1日志1啊日志1日志1啊日志1日志1志1啊日日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
@@ -36,6 +37,7 @@ const stepsList = ref<any[]>([
       },
       {
         title: '我是日志2',
+        blog_id: '13',
         type: '日常',
         content:
           '日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
@@ -50,6 +52,7 @@ const stepsList = ref<any[]>([
     Articlelist: [
       {
         title: '我是日志1',
+        blog_id: '1',
         type: '日常',
         content:
           '日志1啊日志1日志1啊日志1日志1啊日志1日志1志1啊日日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
@@ -59,6 +62,7 @@ const stepsList = ref<any[]>([
       },
       {
         title: '我是日志2',
+        blog_id: '2',
         type: '日常',
         content:
           '日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
@@ -70,9 +74,9 @@ const stepsList = ref<any[]>([
   }
 ])
 
-// 分类查看
-const categoryView = ({ year, month }: { year?: number; month?: number }) => {
-  month ? router.push(`article/${year}/${month}`) : router.push(`article/${year}`)
+// 查看博客详情
+const viewDetail = (blog_id: string) => {
+  router.push(`/article-detail/${blog_id}`)
 }
 </script>
 
@@ -93,7 +97,10 @@ const categoryView = ({ year, month }: { year?: number; month?: number }) => {
                   {{ dayjs(s.createTime).format('hh:mm') }}
                 </span>
                 <span class="ml-2 text-slate-400 text-xs card">
-                  <article class="flex justify-around p-3 shadow-sm border rounded-lg  hover:bg-slate-200 cursor-pointer">
+                  <article
+                    class="flex justify-around p-3 shadow-sm border rounded-lg hover:bg-slate-200 cursor-pointer"
+                    @click="viewDetail(s.blog_id)"
+                  >
                     <div class="w-16 h-16 bg-slate-500"></div>
                     <div class="flex flex-1 flex-wrap items-baseline pl-2 pr-2">
                       <div class="w-full">

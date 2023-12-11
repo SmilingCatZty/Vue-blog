@@ -47,8 +47,7 @@ const navList = ref<any>([
 
 const handleScroll = (): void => {
   const lastScrollPosition = navTop.value
-  const currentScrollPosition =
-    window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+  const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
   if (currentScrollPosition > lastScrollPosition) {
     // 向下滚动
     showHeader.value = false
@@ -63,6 +62,10 @@ const navClickHandle = (nav: any) => {
   router.push(`/${nav.path}`)
 }
 
+const goHome = () => {
+  router.push('home')
+}
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
@@ -74,8 +77,8 @@ onMounted(() => {
     class="header h-16 w-full flex fixed z-10 bg-black bg-opacity-10"
     :class="showHeader ? 'nav-show' : 'nav-hide'"
   >
-    <div class="header-left h-full flex px-5">
-      <div>Smiling cat</div>
+    <div class="header-left h-full flex px-5 cursor-pointer">
+      <div @click="goHome()">Smiling cat</div>
     </div>
     <div class="header-center flex flex-1 justify-center items-center">
       <div
