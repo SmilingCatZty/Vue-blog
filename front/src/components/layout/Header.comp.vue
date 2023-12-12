@@ -63,7 +63,7 @@ const navClickHandle = (nav: any) => {
 }
 
 const goHome = () => {
-  router.push('home')
+  router.push('/home')
 }
 
 onMounted(() => {
