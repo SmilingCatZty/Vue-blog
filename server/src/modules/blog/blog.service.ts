@@ -1,26 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { CreateBlogDto } from './dto/create-blog.dto';
-import { UpdateBlogDto } from './dto/update-blog.dto';
+import { Injectable } from '@nestjs/common'
+import { InjectModel } from '@nestjs/mongoose'
+import { CreateBlogDto } from './dto/create-blog.dto'
+import { UpdateBlogDto } from './dto/update-blog.dto'
+import { BlogDocument, Blog } from './schema/blog.schema'
+import { Model } from 'mongoose'
 
 @Injectable()
 export class BlogService {
-  create(createBlogDto: CreateBlogDto) {
-    return 'This action adds a new blog';
-  }
+  constructor(
+    @InjectModel('Blog')
+    private blogModel: Model<BlogDocument>
+  ) {}
 
-  findAll() {
-    return `This action returns all blog`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} blog`;
-  }
-
-  update(id: number, updateBlogDto: UpdateBlogDto) {
-    return `This action updates a #${id} blog`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} blog`;
+  // 创建博客
+  async create(createBlogDto: CreateBlogDto) {
+    const newBlog = new this.blogModel(createBlogDto)
+    newBlog.blog_id = newBlog._id.toString()
+    return await newBlog.save()
   }
 }
