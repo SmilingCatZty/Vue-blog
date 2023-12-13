@@ -15,7 +15,8 @@ import {
   CellGroup,
   Picker,
   Switch,
-  Notify
+  Notify,
+  Divider
 } from 'vant'
 
 import './assets/css/main.css'
@@ -52,7 +53,8 @@ const vantArr: any[] = [
   CellGroup,
   Picker,
   Switch,
-  Notify
+  Notify,
+  Divider
 ]
 
 VMdEditor.use(githubTheme, {
