@@ -1,14 +1,16 @@
 import { Type } from 'class-transformer'
-import { IsBoolean, IsNumber, IsString } from 'class-validator'
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class FindBlogDto {
   @Type(() => Number)
+  @IsOptional()
   @IsNumber()
-  page: number
+  page?: number
 
   @Type(() => Number)
+  @IsOptional()
   @IsNumber()
-  size: number
+  size?: number
 }
 
 export class FindBlogByAnyParams {

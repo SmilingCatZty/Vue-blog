@@ -36,17 +36,34 @@ export class BlogController {
 
   // 博客列表
   @Get('list')
-  async findBlogList(@Query() page: FindBlogDto = { page: 1, size: 10 }) {
+  async findBlogList(@Query() page: FindBlogDto) {
+    const pageParams = <{ page: number; size: number }>{ page: 1, size: 10 }
+    if (page.page) pageParams.page = page.page
+    if (page.size) pageParams.size = page.size
     try {
       const blogTotal = (await this.blogService.findAll()).length
-      const topBlogList = await this.blogService.findList(page, {
-        blog_is_top: true
-      })
-      const blogList = await this.blogService.findList(page)
+      const blogList = await this.blogService.findList(pageParams)
       return {
         total: blogTotal,
-        topList: topBlogList,
         blogList
+      }
+    } catch (error) {
+      throw new InternalServerErrorException(error.msg)
+    }
+  }
+
+  // 置顶博客列表
+  @Get('top-list')
+  async findTopList(@Query() page: FindBlogDto) {
+    const pageParams = <{ page: number; size: number }>{ page: 1, size: 10 }
+    if (page.page) pageParams.page = page.page
+    if (page.size) pageParams.size = page.size
+    try {
+      const topBlogList = await this.blogService.findList(pageParams, {
+        blog_is_top: true
+      })
+      return {
+        topList: topBlogList
       }
     } catch (error) {
       throw new InternalServerErrorException(error.msg)
