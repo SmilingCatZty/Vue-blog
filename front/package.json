@@ -18,6 +18,7 @@
     "pinia": "^2.1.6",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.3",
+    "theme-shokax-anime": "^0.0.4",
     "vant": "^4.8.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"

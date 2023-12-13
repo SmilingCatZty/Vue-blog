@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import { onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
+import { BackTop } from 'vant'
 import Header from '@/components/layout/Header.comp.vue'
 import Footer from '@/components/layout/Footer.comp.vue'
-import { BackTop } from 'vant'
 import FloatingTool from '@/components/layout/FloatingTool.comp.vue'
+import { initFireworks } from '@/assets/animates/animate'
 
 const route = useRoute()
+
+onBeforeMount(() => {
+  initFireworks()
+})
 </script>
 
 <template>

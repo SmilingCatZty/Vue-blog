@@ -3,13 +3,13 @@ import { onMounted, ref } from 'vue'
 import Waves from '@/components/layout/wave.comp.vue'
 import { useRouter } from 'vue-router'
 import Pagination from '@/components/layout/Pagination.comp.vue'
-import { type PageModel } from '@/models/blog.model'
+import type { PageModel } from '@/models/blog.model'
 import { reactive } from 'vue'
 
 const router = useRouter()
 
 let isFixed = ref<boolean>(false) // 右侧栏围是否为固定定位
-const homeMainRef = ref<any>(null)
+const homeMainRef = ref<HTMLElement>()
 
 const pageParams = reactive<PageModel>({
   page: 1,
@@ -85,8 +85,8 @@ const pageHandle = (page: number) => {
 }
 
 const handleScroll = () => {
-  const heightFromTop = homeMainRef.value.getBoundingClientRect()
-  isFixed.value = heightFromTop.top <= 0 ? true : false
+  const heightFromTop = homeMainRef.value?.getBoundingClientRect()
+  if (heightFromTop) isFixed.value = heightFromTop.top <= 0 ? true : false
 }
 
 const viewDetail = (blog_id: string) => {
