@@ -1,4 +1,4 @@
-const imgPath: string = 'src/assets/image/'
+const imgPath: string = 'src/assets/svg/'
 
 export const SvgIcons = new Map([
   ['home', { name: '主页图标', icon: imgPath + 'icon-home.svg' }],

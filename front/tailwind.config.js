@@ -7,10 +7,17 @@ module.exports = {
   ],
   media: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      cursor: {
+        custom: 'url(/images/custom-cursor.png), auto',
+      },
+    },
   },
   variants: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    require('./src/libs/tailwind-plugin.js'),
+  ],
 }
