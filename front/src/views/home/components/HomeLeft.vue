@@ -59,8 +59,14 @@ const pageHandle = (page: number) => {
   pageParams.page = page
 }
 
+// 查看详情
 const viewDetail = (blog_id: string) => {
   router.push(`/article-detail/${blog_id}`)
+}
+
+// 查看更多
+const viewMore = () => {
+  router.push(`/article`)
 }
 </script>
 
@@ -72,7 +78,11 @@ const viewDetail = (blog_id: string) => {
         置顶文章
       </van-divider>
       <ul>
-        <li class="left-blog card shadow-lg hover:shadow-2xl bg-white" v-for="(blog, index) in topBlog" :key="index">
+        <li
+          class="left-blog relative card m-4 shadow-lg hover:shadow-2xl bg-white"
+          v-for="(blog, index) in topBlog"
+          :key="index"
+        >
           <article class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
             <div
               class="blog-left"
@@ -92,14 +102,17 @@ const viewDetail = (blog_id: string) => {
                 <span>{{ blog.type }}</span>
               </div>
               <div class="content-main">
-                <span class="content-main_title">{{ blog.title }}</span>
-                <span class="content-main_text">{{ blog.content }}</span>
+                <span class="content-main_title mt-2">{{ blog.title }}</span>
+                <span class="content-main_text text-ellipsis line-clamp-4 mt-2">{{ blog.content }}</span>
               </div>
-              <div class="content-bottom">
+              <div class="content-bottom" :style="{ textAlign: index % 2 === 0 ? 'left' : 'right' }">
                 <span>{{ blog.author }}</span>
               </div>
             </div>
           </article>
+          <div class="blog-more" :class="index % 2 == 0 ? 'blog-more-l' : 'blog-more-r'" @click="viewMore()">
+            more...
+          </div>
         </li>
       </ul>
     </main>
@@ -109,7 +122,11 @@ const viewDetail = (blog_id: string) => {
         文章列表
       </van-divider>
       <ul>
-        <li class="left-blog card shadow-lg hover:shadow-2xl bg-white" v-for="(blog, index) in blogList" :key="index">
+        <li
+          class="left-blog card m-4 shadow-lg hover:shadow-2xl bg-white"
+          v-for="(blog, index) in blogList"
+          :key="index"
+        >
           <article class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
             <div
               class="blog-left"
@@ -118,7 +135,8 @@ const viewDetail = (blog_id: string) => {
                 WebkitClipPath:
                   index % 2 == 0
                     ? `polygon(0 0, 92% 0%, 100% 100%, 0% 100%)`
-                    : `polygon(0 0%,100% 0%,100% 100%,8% 100%)`
+                    : `polygon(0 0%,100% 0%,100% 100%,8% 100%)`,
+                borderRadius: index % 2 == 0 ? '1rem 0 0 1rem' : '0 1rem 1rem 0'
               }"
             >
               <img :src="blog.img" alt="" class="blog-img border object-cover" />
@@ -129,14 +147,17 @@ const viewDetail = (blog_id: string) => {
                 <span>{{ blog.type }}</span>
               </div>
               <div class="content-main">
-                <span class="content-main_title">{{ blog.title }}</span>
-                <span class="content-main_text">{{ blog.content }}</span>
+                <span class="content-main_title mt-2">{{ blog.title }}</span>
+                <span class="content-main_text text-ellipsis line-clamp-4 mt-2">{{ blog.content }}</span>
               </div>
-              <div class="content-bottom">
+              <div class="content-bottom" :style="{ textAlign: index % 2 === 0 ? 'left' : 'right' }">
                 <span>{{ blog.author }}</span>
               </div>
             </div>
           </article>
+          <div class="blog-more" :class="index % 2 == 0 ? 'blog-more-l' : 'blog-more-r'" @click="viewMore()">
+            more...
+          </div>
         </li>
       </ul>
     </main>
@@ -148,9 +169,8 @@ const viewDetail = (blog_id: string) => {
 
 <style lang="scss" scoped>
 .left-blog {
-  width: 100%;
   height: 250px;
-  overflow: hidden;
+  // overflow: hidden;
 
   .blog-contain {
     height: 100%;
@@ -158,6 +178,7 @@ const viewDetail = (blog_id: string) => {
 
     .blog-left {
       width: 50%;
+      border-radius: 1rem 0 0 1rem;
       overflow: hidden;
 
       .blog-img {
@@ -171,10 +192,9 @@ const viewDetail = (blog_id: string) => {
     .blog-right {
       width: 50%;
       display: flex;
-      flex-wrap: wrap;
       flex-direction: column;
       justify-content: space-between;
-      padding: 10px;
+      padding: 15px;
 
       .content-top {
         width: 100%;
@@ -188,8 +208,6 @@ const viewDetail = (blog_id: string) => {
         flex-direction: column;
         flex: 1;
         width: 100%;
-        margin-top: 10px;
-        margin-bottom: 10px;
         .content-main_title {
           width: 100%;
           font-size: 24px;
@@ -208,6 +226,32 @@ const viewDetail = (blog_id: string) => {
         color: grey;
       }
     }
+  }
+  .blog-more {
+    position: absolute;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.5s;
+    bottom: 0;
+    padding: 8px 25px;
+    color: var(#fff);
+    background-image: linear-gradient(to right, #ed6ea0 0, #ec8c69 100%);
+  }
+  .blog-more-l {
+    right: 0;
+    border-radius: 15px 0;
+  }
+  .blog-more-r {
+    left: 0;
+    border-radius: 0 15px;
+  }
+  .blog-more-l:hover {
+    right: -10px;
+    bottom: -10px;
+  }
+  .blog-more-r:hover {
+    left: -10px;
+    bottom: -10px;
   }
   .blog-contain:hover img {
     animation: 1.5s blog-img_rotate;

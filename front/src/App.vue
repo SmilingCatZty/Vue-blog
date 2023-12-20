@@ -5,7 +5,7 @@ import { BackTop } from 'vant'
 import Header from '@/components/layout/Header.comp.vue'
 import Footer from '@/components/layout/Footer.comp.vue'
 import FloatingTool from '@/components/layout/FloatingTool.comp.vue'
-import { initFireworks } from '@/assets/animates/animate'
+import { initFireworks } from '@/assets/animates/fireworks'
 
 const route = useRoute()
 

@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-import { } from 'vue'
-import UpLoad from './UploadFile.comp.vue'
 </script>
 
 <template>
   <div class="footer bg-amber-100">
-    <!-- <UpLoad></UpLoad> -->
+    <div id="jsi-flying-fish-container" class="container" style="background-color: #fff"></div>
   </div>
 </template>
 
@@ -22,6 +20,30 @@ import UpLoad from './UploadFile.comp.vue'
       flex: 1;
       text-align: center;
     }
+  }
+}
+
+#sidebar_search_box input[type='text'] {
+  max-width: none;
+}
+#jsi-flying-fish-container {
+  opacity: 0.7;
+  width: 100%;
+  bottom: 0;
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: none;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: none;
+  }
+}
+@media (min-width: 640px) {
+  .container {
+    max-width: none;
   }
 }
 </style>
