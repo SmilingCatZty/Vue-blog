@@ -36,13 +36,16 @@ export class BlogController {
 
   // 博客列表
   @Get('list')
-  async findBlogList(@Query() page: FindBlogDto) {
+  async findBlogList(@Query() query: FindBlogDto) {
     const pageParams = <{ page: number; size: number }>{ page: 1, size: 10 }
-    if (page.page) pageParams.page = page.page
-    if (page.size) pageParams.size = page.size
+    const { page, size, ...params } = query
+
+    if (page) pageParams.page = Number(page)
+    if (page) pageParams.size = Number(size)
+
     try {
       const blogTotal = (await this.blogService.findAll()).length
-      const blogList = await this.blogService.findList(pageParams)
+      const blogList = await this.blogService.findList(pageParams, params)
       return {
         total: blogTotal,
         blogList
@@ -63,7 +66,7 @@ export class BlogController {
         blog_is_top: true
       })
       return {
-        topList: topBlogList
+        blogList: topBlogList
       }
     } catch (error) {
       throw new InternalServerErrorException(error.msg)

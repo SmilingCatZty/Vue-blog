@@ -1,21 +1,11 @@
 <script lang="ts" setup>
 import { reactive, onMounted, ref } from 'vue'
 import type { FormInstance } from 'vant/lib/form/types'
+import type { BlogInfoModel } from '@/models/blog.model'
 import { showNotify } from 'vant'
-import UploadFile from '@/components/layout/UploadFile.comp.vue'
 import { blogApi } from '@/api/modules/blog'
+import UploadFile from '@/components/layout/UploadFile.comp.vue'
 import Tag from '@/components/layout/Tag.vue'
-
-type BlogInfoModel = {
-  blog_title: string
-  blog_type: string
-  blog_labels: string[]
-  blog_is_top: boolean
-  blog_background: string
-  blog_digest: string
-  blog_content: string
-  create_time: Date
-}
 
 const defaultBlogInfo: BlogInfoModel = {
   blog_title: '',

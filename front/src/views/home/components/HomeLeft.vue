@@ -1,62 +1,57 @@
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import type { PageModel } from '@/models/blog.model'
+import type { PageModel, BlogInfoModel } from '@/models/blog.model'
+import { blogApi } from '@/api/modules/blog'
 import Pagination from '@/components/layout/Pagination.comp.vue'
+import dayjs from 'dayjs'
 
 const router = useRouter()
 
 const pageParams = reactive<PageModel>({
   page: 1,
-  size: 10
+  size: 5
 })
 
+const user = {
+  name: 'zty0422'
+}
+const total = ref<number>(0)
+
 // 置顶文章
-const topBlog = ref<any[]>([
-  {
-    title: '我是顶部文章1',
-    type: '日常',
-    content:
-      '顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...顶部文章2呀顶部文章2...',
-    img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F29%2F20161129152324_LCiUN.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1700701784&t=1a6df5da8f63b8e1f49f84447e3f5e91',
-    author: '0422',
-    createTime: 123321321321321
-  }
-])
+let topBlogList = ref<BlogInfoModel[]>([])
 
 // 日志列表
-const blogList = ref<any[]>([
-  {
-    title: '我是日志1',
-    type: '日常',
-    content:
-      '日志1啊日志1日志1啊日志1日志1啊日志1日志1志1啊日日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
-    img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F29%2F20161129152324_LCiUN.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1700701784&t=1a6df5da8f63b8e1f49f84447e3f5e91',
-    author: '0422',
-    createTime: 123321321321321
-  },
-  {
-    title: '我是日志2',
-    type: '日常',
-    content:
-      '日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
-    img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201406%2F10%2F20140610142525_vCrms.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1700701833&t=4cde503e7b0f34dfe0d0e53dc3550421',
-    author: '0423',
-    createTime: 123321321321321
-  },
-  {
-    title: '我是日志3',
-    type: '日常',
-    content:
-      '日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1日志1啊日志1',
-    img: 'https://pica.zhimg.com/v2-e034491c1f5c519df0a6197c5ca58c40_r.jpg?source=1940ef5c',
-    author: '0424',
-    createTime: 123321321321321
-  }
-])
+let blogList = ref<BlogInfoModel[]>([])
 
+// 获取博客列表
+const getBlogList = async () => {
+  try {
+    const { status, data } = await blogApi.getBlogList(pageParams)
+    if (status === 200) {
+      blogList.value = data.blogList
+      total.value = data.total
+    }
+  } catch (error) {
+    console.error('home-left', error)
+  }
+}
+// 获取置顶博客列表
+const getTopBlogList = async () => {
+  try {
+    const { status, data } = await blogApi.getTopBlogList()
+    if (status === 200) {
+      topBlogList.value = data.blogList
+    }
+  } catch (error) {
+    console.error('home-left', error)
+  }
+}
+
+// 分页管理
 const pageHandle = (page: number) => {
   pageParams.page = page
+  getBlogList()
 }
 
 // 查看详情
@@ -68,22 +63,27 @@ const viewDetail = (blog_id: string) => {
 const viewMore = () => {
   router.push(`/article`)
 }
+
+onMounted(() => {
+  getBlogList()
+  getTopBlogList()
+})
 </script>
 
 <template>
   <div class="left-box w-full">
     <!-- 置顶文章 -->
-    <main v-if="topBlog.length">
+    <main v-if="topBlogList.length">
       <van-divider :style="{ fontSize: '24px', color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">
         置顶文章
       </van-divider>
       <ul>
         <li
           class="left-blog relative card m-4 shadow-lg hover:shadow-2xl bg-white"
-          v-for="(blog, index) in topBlog"
+          v-for="(blog, index) in topBlogList"
           :key="index"
         >
-          <article class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
+          <article v-if="blog.blog_id" class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
             <div
               class="blog-left"
               :style="{
@@ -94,19 +94,19 @@ const viewMore = () => {
                     : `polygon(0 0%,100% 0%,100% 100%,8% 100%)`
               }"
             >
-              <img :src="blog.img" alt="" class="blog-img border object-cover" />
+              <img :src="blog.blog_background" alt="" class="blog-img border object-cover" />
             </div>
             <div class="blog-right">
               <div class="content-top" style="{}">
-                <span>{{ blog.createTime }}</span>
-                <span>{{ blog.type }}</span>
+                <span>{{ dayjs(blog.create_time).format('YYYY-MM-DD') }}</span>
+                <span>{{ blog.blog_type }}</span>
               </div>
               <div class="content-main">
-                <span class="content-main_title text-xl text-ellipsis line-clamp-1 mt-2">{{ blog.title }}</span>
-                <span class="content-main_text text-sm text-ellipsis line-clamp-5 mt-2">{{ blog.content }}</span>
+                <span class="content-main_title text-xl text-ellipsis line-clamp-1 mt-2">{{ blog.blog_title }}</span>
+                <span class="content-main_text text-sm text-ellipsis line-clamp-5 mt-2">{{ blog.blog_content }}</span>
               </div>
               <div class="content-bottom" :style="{ textAlign: index % 2 === 0 ? 'left' : 'right' }">
-                <span>{{ blog.author }}</span>
+                <span>{{ user.name }}</span>
               </div>
             </div>
           </article>
@@ -125,9 +125,9 @@ const viewMore = () => {
         <li
           class="left-blog card m-4 shadow-lg hover:shadow-2xl bg-white"
           v-for="(blog, index) in blogList"
-          :key="index"
+          :key="blog.blog_id"
         >
-          <article class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
+          <article v-if="blog.blog_id" class="blog-contain cursor-pointer" @click="viewDetail(blog.blog_id)">
             <div
               class="blog-left"
               :style="{
@@ -139,19 +139,19 @@ const viewMore = () => {
                 borderRadius: index % 2 == 0 ? '1rem 0 0 1rem' : '0 1rem 1rem 0'
               }"
             >
-              <img :src="blog.img" alt="" class="blog-img border object-cover" />
+              <img :src="blog.blog_background" alt="" class="blog-img border object-cover" />
             </div>
             <div class="blog-right">
-              <div class="content-top" style="{}">
-                <span>{{ blog.createTime }}</span>
-                <span>{{ blog.type }}</span>
+              <div class="content-top text-ellipsis line-clamp-1">
+                <span>{{ dayjs(blog.create_time).format('YYYY-MM-DD') }}</span>
+                <span class="ml-3">{{ blog.blog_type }}</span>
               </div>
               <div class="content-main">
-                <span class="content-main_title text-xl text-ellipsis line-clamp-1 mt-2">{{ blog.title }}</span>
-                <span class="content-main_text text-sm text-ellipsis line-clamp-5 mt-2">{{ blog.content }}</span>
+                <span class="content-main_title text-xl text-ellipsis line-clamp-1 mt-2">{{ blog.blog_title }}</span>
+                <span class="content-main_text text-base text-ellipsis line-clamp-5 mt-1">{{ blog.blog_content }}</span>
               </div>
               <div class="content-bottom" :style="{ textAlign: index % 2 === 0 ? 'left' : 'right' }">
-                <span>{{ blog.author }}</span>
+                <span>{{ user.name }}</span>
               </div>
             </div>
           </article>
@@ -163,7 +163,7 @@ const viewMore = () => {
     </main>
   </div>
   <div class="text-center w-full p-2">
-    <Pagination :total="4" :size="5" @pageHandle="pageHandle" />
+    <Pagination :total="total" :size="pageParams.size" @pageHandle="pageHandle" />
   </div>
 </template>
 

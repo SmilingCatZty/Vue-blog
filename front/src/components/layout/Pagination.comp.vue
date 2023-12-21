@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const props = defineProps({
   size: {
@@ -17,6 +17,9 @@ const emit = defineEmits<{
 }>()
 
 const curPage = ref<number>(1) // 当前的页码
+const pageCount = computed(() => {
+  return props.total < props.size ? 1 : props.total / props.size
+})
 
 const getNumberRange = (n: number) => {
   return Array.from({ length: n }, (_, index) => index + 1)
@@ -31,7 +34,7 @@ const pageHandle = (page: number) => {
 <template>
   <div class="blog-pagination">
     <ul class="flex w-full justify-center">
-      <li class="flex" v-for="num in getNumberRange(props.total)" :key="num">
+      <li class="flex" v-for="num in getNumberRange(pageCount)" :key="num">
         <span
           v-if="num === curPage - 2"
           class="w-8 h-8 ml-1 mr-1 flex justify-center items-center cursor-pointer"
@@ -40,7 +43,7 @@ const pageHandle = (page: number) => {
           ...
         </span>
         <span
-          v-show="(curPage < 3 ? num <= 3 : num < curPage + 2 && num > curPage - 2) || num === props.total"
+          v-show="(curPage < 3 ? num <= 3 : num < curPage + 2 && num > curPage - 2) || num === pageCount"
           class="w-8 h-8 ml-1 mr-1 flex justify-center items-center cursor-pointer"
           :class="num === curPage ? 'pagination-li-active' : ''"
           @click="pageHandle(num)"
@@ -48,7 +51,7 @@ const pageHandle = (page: number) => {
           {{ num }}
         </span>
         <span
-          v-if="num === curPage + 2 && num !== props.total && num !== props.total - 1"
+          v-if="num === curPage + 2 && num !== props.total && num !== pageCount - 1"
           class="w-8 h-8 ml-1 mr-1 flex justify-center items-center cursor-pointer"
           @click="pageHandle(num)"
         >
@@ -61,6 +64,6 @@ const pageHandle = (page: number) => {
 
 <style lang="scss" scoped>
 .pagination-li-active {
-  background-color: rgba($color: #f4baba, $alpha: .7);
+  background-color: rgba($color: #f4baba, $alpha: 0.7);
 }
 </style>

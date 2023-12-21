@@ -40,10 +40,10 @@ export class BlogService {
    */
   async findList(
     page: FindBlogDto,
-    data?: FindBlogByAnyParams
-  ): Promise<Blog[]> {
+    data?: FindBlogDto
+  ): Promise<Blog[]> {    
     const blogList = this.blogModel
-      .find({ ...data })
+      .find(data)
       .sort({ create_time: -1 })
       .skip(page.size * (page.page - 1)) // 分页
       .limit(page.size) // 数量限制

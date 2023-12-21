@@ -11,6 +11,11 @@ export class FindBlogDto {
   @IsOptional()
   @IsNumber()
   size?: number
+
+  @IsBoolean()
+  @IsOptional()
+  @Type(() => Boolean)
+  blog_is_top?: boolean // 置顶博客
 }
 
 export class FindBlogByAnyParams {
