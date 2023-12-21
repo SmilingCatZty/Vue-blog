@@ -13,6 +13,9 @@ export class Blog {
   @Prop()
   blog_type: string // 博客类型
 
+  @Prop({ default: [] })
+  blog_labels: string[] // 博客标签列表
+
   @Prop()
   blog_title: string // 博客标题
 
@@ -26,7 +29,7 @@ export class Blog {
   blog_is_top: boolean // 置顶博客
 
   @Prop()
-  create_time: number // 创建时间
+  create_time: Date // 创建时间
 
   // @Prop()
   // blog_file: Buffer

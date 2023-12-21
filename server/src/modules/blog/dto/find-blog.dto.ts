@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer'
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsBoolean, IsDate, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class FindBlogDto {
   @Type(() => Number)
@@ -29,6 +29,6 @@ export class FindBlogByAnyParams {
   @IsBoolean()
   blog_is_top?: boolean // 置顶博客
 
-  @IsNumber()
-  create_time?: number // 创建时间
+  @IsDate()
+  create_time?: Date // 创建时间
 }

@@ -5,7 +5,7 @@ export type BlogInfoModel = {
   blog_content: string // 博客内容
   blog_background: string // 博客背景图
   blog_is_top: boolean // 置顶博客
-  create_time: number // 创建时间
+  create_time: Date // 创建时间
 }
 
 export type PageModel = {

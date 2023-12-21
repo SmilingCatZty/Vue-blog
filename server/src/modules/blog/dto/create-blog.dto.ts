@@ -1,8 +1,18 @@
-import { IsBoolean, IsNumber, IsString } from 'class-validator'
+import {
+  IsArray,
+  IsBoolean,
+  IsDateString,
+  IsOptional,
+  IsString
+} from 'class-validator'
 
 export class CreateBlogDto {
   @IsString()
   blog_type: string // 博客类型
+
+  @IsArray()
+  @IsOptional()
+  blog_labels: string[] // 博客标签
 
   @IsString()
   blog_title: string // 博客标题
@@ -16,6 +26,6 @@ export class CreateBlogDto {
   @IsBoolean()
   blog_is_top: boolean // 置顶博客
 
-  @IsNumber()
-  create_time: number // 创建时间
+  @IsDateString()
+  create_time: Date // 创建时间
 }
