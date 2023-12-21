@@ -104,10 +104,10 @@ const viewDetail = (blog_id: string) => {
                     <div class="w-16 h-16 bg-slate-500"></div>
                     <div class="flex flex-1 flex-wrap items-baseline pl-2 pr-2">
                       <div class="w-full">
-                        <span>{{ s.title }}</span>
-                        <span>{{ s.type }}</span>
+                        <span  class="article-right-title text-sm text-ellipsis line-clamp-1">{{ s.title }}</span>
+                        <span class="article-right-label ">{{ s.type }}</span>
                       </div>
-                      <div class="w-full">
+                      <div class="w-full line-clamp-2">
                         {{ s.content }}
                       </div>
                     </div>
@@ -124,23 +124,14 @@ const viewDetail = (blog_id: string) => {
 
 <style lang="scss" scoped>
 .article {
-  .article-header {
-    height: 75vh;
-    z-index: 1;
-    .header-title {
-      z-index: 2;
-      left: 50%;
-      top: 30%;
-      transform: translate(-50%, -50%);
-    }
-    .header-img {
-      width: 100%;
-      height: 75vh;
-    }
-  }
-  .article-main {
-    z-index: 5;
-    overflow: hidden;
-  }
+.article-right-title{
+  color: #6e9aff;
+}
+.article-right-label{
+  border-radius: 6px;
+  padding: 2px 4px;
+  background-color:#ffe1ff ;
+  font-size: 0.6rem;
+}
 }
 </style>

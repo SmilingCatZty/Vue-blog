@@ -16,7 +16,7 @@ type BlogInfoModel = {
 }
 
 const props = defineProps({
-  right: {
+  left: {
     type: String,
     default: '30px'
   },
@@ -125,7 +125,7 @@ onMounted(() => {
     v-show="showFloatingBtn"
     class="floating-tool z-20 fixed w-10 h-10 bottom-52 bg-red-300 cursor-pointer ani"
     :class="showFloatingBtn ? 'float-tool--active' : 'floating-tool'"
-    :style="{ right: props.right, bottom: props.bottom }"
+    :style="{ left: props.left, bottom: props.bottom }"
     @click="useTool"
   >
     <div class="w-full h-full flex justify-center items-center">

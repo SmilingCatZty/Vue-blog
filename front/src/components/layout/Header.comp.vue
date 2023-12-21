@@ -75,7 +75,7 @@ onMounted(() => {
 <template>
   <div
     ref="navHeader"
-    class="header h-16 w-full flex justify-between fixed z-10 bg-black bg-opacity-10"
+    class="header h-16 w-full flex justify-between fixed z-20 bg-black bg-opacity-10"
     :class="showHeader ? 'nav-show' : 'nav-hide'"
   >
     <!-- 导航左侧 -->

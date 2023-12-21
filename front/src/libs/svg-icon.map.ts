@@ -8,5 +8,9 @@ export const SvgIcons = new Map([
   ['link', { name: '链接图标', icon: imgPath + 'icon-link.svg' }],
   ['user', { name: '用户', icon: imgPath + 'icon-user.svg' }],
   ['weather', { name: '天气', icon: imgPath + 'icon-weather.svg' }],
-  ['search', { name: '搜索', icon: imgPath + 'icon-search.svg' }]
+  ['search', { name: '搜索', icon: imgPath + 'icon-search.svg' }],
+  ['github', { name: 'github', icon: imgPath + 'icon-github.svg' }],
+  ['gitee', { name: 'gitee', icon: imgPath + 'icon-gitee.svg' }],
+  ['juejin', { name: 'juejin', icon: imgPath + 'icon-juejin.svg' }],
+  ['qq', { name: 'qq', icon: imgPath + 'icon-qq.svg' }],
 ])

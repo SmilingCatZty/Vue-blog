@@ -61,6 +61,6 @@ const pageHandle = (page: number) => {
 
 <style lang="scss" scoped>
 .pagination-li-active {
-  background-color: rgba($color: #d88282, $alpha: 1);
+  background-color: rgba($color: #f4baba, $alpha: .7);
 }
 </style>

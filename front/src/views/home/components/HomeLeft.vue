@@ -102,8 +102,8 @@ const viewMore = () => {
                 <span>{{ blog.type }}</span>
               </div>
               <div class="content-main">
-                <span class="content-main_title mt-2">{{ blog.title }}</span>
-                <span class="content-main_text text-ellipsis line-clamp-4 mt-2">{{ blog.content }}</span>
+                <span class="content-main_title text-xl text-ellipsis line-clamp-1 mt-2">{{ blog.title }}</span>
+                <span class="content-main_text text-sm text-ellipsis line-clamp-5 mt-2">{{ blog.content }}</span>
               </div>
               <div class="content-bottom" :style="{ textAlign: index % 2 === 0 ? 'left' : 'right' }">
                 <span>{{ blog.author }}</span>
@@ -147,8 +147,8 @@ const viewMore = () => {
                 <span>{{ blog.type }}</span>
               </div>
               <div class="content-main">
-                <span class="content-main_title mt-2">{{ blog.title }}</span>
-                <span class="content-main_text text-ellipsis line-clamp-4 mt-2">{{ blog.content }}</span>
+                <span class="content-main_title text-xl text-ellipsis line-clamp-1 mt-2">{{ blog.title }}</span>
+                <span class="content-main_text text-sm text-ellipsis line-clamp-5 mt-2">{{ blog.content }}</span>
               </div>
               <div class="content-bottom" :style="{ textAlign: index % 2 === 0 ? 'left' : 'right' }">
                 <span>{{ blog.author }}</span>
@@ -168,6 +168,12 @@ const viewMore = () => {
 </template>
 
 <style lang="scss" scoped>
+@font-face {
+  font-family: 'Rainbow-Party-2';
+  src: url('@/assets/font/Rainbow-Party-2.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 .left-blog {
   height: 250px;
   // overflow: hidden;
@@ -210,12 +216,11 @@ const viewMore = () => {
         width: 100%;
         .content-main_title {
           width: 100%;
-          font-size: 24px;
+          color: #6e9aff;
         }
 
         .content-main_text {
           width: 100%;
-          font-size: 16px;
         }
       }
 
@@ -228,22 +233,25 @@ const viewMore = () => {
     }
   }
   .blog-more {
+    font-family: 'Rainbow-Party-2';
     position: absolute;
-    font-size: 18px;
+    font-size: 22px;
     cursor: pointer;
     transition: all 0.5s;
     bottom: 0;
     padding: 8px 25px;
     color: var(#fff);
-    background-image: linear-gradient(to right, #ed6ea0 0, #ec8c69 100%);
+    background-image: linear-gradient(to right, #acd3ff 0, #cdd5ff 100%);
   }
   .blog-more-l {
     right: 0;
     border-radius: 15px 0;
+    color: white;
   }
   .blog-more-r {
     left: 0;
     border-radius: 0 15px;
+    color: black;
   }
   .blog-more-l:hover {
     right: -10px;
@@ -254,11 +262,14 @@ const viewMore = () => {
     bottom: -10px;
   }
   .blog-contain:hover img {
-    animation: 1.5s blog-img_rotate;
+    animation: 0.8s blog-img_rotate;
   }
+  // .blog-contain:visited img {
+  //   animation: 1.5s blog-img_rotate;
+  // }
 }
 .left-blog + .left-blog {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .left-box-title::before {
@@ -287,7 +298,15 @@ const viewMore = () => {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.3);
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes blog-img_rotate_leave {
+  0% {
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
