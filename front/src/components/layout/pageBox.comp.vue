@@ -8,7 +8,7 @@ const props = defineProps({
     type: String,
     default: '我是顶部文章1'
   },
-  backGround: {
+  background: {
     type: String,
     default: 'http://43.138.109.120:9000/avatar/765664a8a75211296a9cd89671d6d660.png'
   }
@@ -30,7 +30,7 @@ onMounted(() => {
       <div class="header-title fixed">
         <h1 class="text-4xl text-slate-100">{{ props.title }}</h1>
       </div>
-      <img class="header-img fixed" :src="props.backGround" alt="" />
+      <img class="header-img fixed" :src="props.background" alt="" />
       <Waves />
     </header>
     <main class="article-main">

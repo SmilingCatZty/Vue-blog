@@ -10,12 +10,12 @@
 <style lang="scss" scoped>
 .footer {
   height: 20vh;
-
+  
   .f {
     display: flex;
     width: 100%;
     justify-content: space-between;
-
+    
     .password {
       flex: 1;
       text-align: center;
@@ -27,7 +27,8 @@
   max-width: none;
 }
 #jsi-flying-fish-container {
-  opacity: 0.7;
+  opacity: 1.0;
+  z-index: 20;
   width: 100%;
   bottom: 0;
 }

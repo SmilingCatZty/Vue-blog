@@ -59,6 +59,13 @@ const handleScroll = (): void => {
   navTop.value = currentScrollPosition
 }
 
+const calssHandle = () => {
+  let classRes = ''
+  classRes = showHeader.value ? 'nav-show' : 'nav-hide'
+  classRes = window.scrollY === 0 ? classRes + ' ' + 'header-top' : classRes + ' ' + 'header-untop'
+  return classRes
+}
+
 const navClickHandle = (nav: any) => {
   router.push(`/${nav.path}`)
 }
@@ -73,11 +80,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    ref="navHeader"
-    class="header h-16 w-full flex justify-between fixed z-20 bg-black bg-opacity-10"
-    :class="showHeader ? 'nav-show' : 'nav-hide'"
-  >
+  <div ref="navHeader" class="header h-16 w-full flex justify-between fixed z-20" :class="calssHandle()">
     <!-- 导航左侧 -->
     <div class="header-left font-type font-bold h-full flex items-center px-5 cursor-pointer">
       <div @click="goHome()">Smiling cat</div>
@@ -118,6 +121,12 @@ onMounted(() => {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Miaomiao';
+  src: url('@/assets/font/Miaomiao.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 .header {
   box-sizing: border-box;
   padding: 0.25rem;
@@ -130,12 +139,20 @@ onMounted(() => {
   .header-center {
     .items-center {
       border-radius: 15px;
+      font-family: Miaomiao;
     }
 
     .items-center:hover {
       background-color: rgba($color: #000000, $alpha: 0.1);
     }
   }
+}
+
+.header-top {
+  background: linear-gradient(-225deg, rgba($color: #6b97e1, $alpha: 0) 0, rgba($color: #f8cced, $alpha: 0) 100%);
+}
+.header-untop {
+  background: linear-gradient(-225deg, rgba($color: #6b97e1, $alpha: 0.6) 0, rgba($color: #f8cced, $alpha: 1) 100%);
 }
 
 .nav-show {

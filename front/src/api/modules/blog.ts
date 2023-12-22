@@ -17,7 +17,7 @@ export const blogApi = {
 
   /**
    * 创建博客
-   * @param blogInfo
+   * @param blogInfo 博客信息
    */
   createBlog: (blogInfo: BlogInfoModel) => {
     return requester({
@@ -29,7 +29,7 @@ export const blogApi = {
 
   /**
    * 查询博客列表
-   * @param pageParams
+   * @param pageParams {page,size}
    */
   getBlogList: (pageParams: PageModel) => {
     return requester({
@@ -45,6 +45,17 @@ export const blogApi = {
   getTopBlogList: () => {
     return requester({
       url: `blog/top-list`,
+      method: 'get'
+    })
+  },
+
+  /**
+   * 查询博客详情
+   * @param blog_id
+   */
+  getBlogDetail: (blog_id: string) => {
+    return requester({
+      url: `blog/detail/${blog_id}`,
       method: 'get'
     })
   }
