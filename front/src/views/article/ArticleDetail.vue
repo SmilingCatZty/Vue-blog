@@ -42,13 +42,15 @@ const uploadParsingSuccess = (file: any) => {
 
 watch(
   () => route.params.blog_id,
-  async () => {
-    await getBlogInfo()
+  async (v) => {
+    if (v) {
+      await getBlogInfo()
+    }
   }
 )
-// onMounted(() => {
-//   getBlogInfo()
-// })
+onMounted(() => {
+  getBlogInfo()
+})
 </script>
 
 <template>

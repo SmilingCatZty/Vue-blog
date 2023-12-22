@@ -18,6 +18,18 @@ export class FindBlogDto {
   blog_is_top?: boolean // 置顶博客
 }
 
+export class FindBlogByTimeDto{
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
+  year?: number
+
+  @Type(() => Number)
+  @IsOptional()
+  @IsNumber()
+  month?: number
+}
+
 export class FindBlogByAnyParams {
   @IsString()
   blog_type?: string // 博客类型

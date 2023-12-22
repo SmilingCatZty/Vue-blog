@@ -10,7 +10,11 @@ import {
 import { BlogService } from './blog.service'
 import { CreateBlogDto } from './dto/create-blog.dto'
 import { UpdateBlogDto } from './dto/update-blog.dto'
-import { FindBlogDto, FindBlogByAnyParams } from './dto/find-blog.dto'
+import {
+  FindBlogDto,
+  FindBlogByAnyParams,
+  FindBlogByTimeDto
+} from './dto/find-blog.dto'
 
 @Controller('blog')
 export class BlogController {
@@ -78,5 +82,41 @@ export class BlogController {
   async findBlog(@Param('blog_id') blog_id: string) {
     const blog = await this.blogService.findOneById(blog_id)
     return blog
+  }
+
+  // 归档查询
+  @Get('type-list')
+  async findBlogListForType() {
+    try {
+      const res = await this.blogService.findTypeList()
+      if (res) return res
+    } catch (error) {
+      throw new InternalServerErrorException(error.msg)
+    }
+  }
+
+  // 归档查询 --- 年
+  @Get('type-year/:year')
+  async findBlogListForYear(@Param('blog_id') year: number) {
+    try {
+      const res = await this.blogService.findTypeListForYear(year)
+      if (res) return res
+    } catch (error) {
+      throw new InternalServerErrorException(error.msg)
+    }
+  }
+  // 归档查询 --- 月
+  @Get('type-month')
+  async findBlogListForMonth(@Query() query: FindBlogByTimeDto) {
+    const { year, month } = query
+    try {
+      const res = await this.blogService.findTypeListForMonth(
+        Number(year),
+        Number(month)
+      )
+      if (res) return res
+    } catch (error) {
+      throw new InternalServerErrorException(error.msg)
+    }
   }
 }

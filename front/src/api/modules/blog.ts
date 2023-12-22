@@ -58,5 +58,39 @@ export const blogApi = {
       url: `blog/detail/${blog_id}`,
       method: 'get'
     })
+  },
+
+  /**
+   * 查询归档列表
+   * @param blog_id
+   */
+  getArchive: () => {
+    return requester({
+      url: `blog/type-list`,
+      method: 'get'
+    })
+  },
+
+  /**
+   * 查询归档列表 --- 年
+   * @param year 年份
+   */
+  getArchiveForYear: (year: number) => {
+    return requester({
+      url: `blog/type-year/${year}`,
+      method: 'get'
+    })
+  },
+
+  /**
+   * 查询归档列表 --- 月
+   * @param month 月份
+   */
+  getArchiveForMonth: (year: number, month: number) => {
+    return requester({
+      url: `blog/type-month`,
+      method: 'get',
+      params: { year, month }
+    })
   }
 }
