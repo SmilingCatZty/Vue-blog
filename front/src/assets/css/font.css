@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'XiangJiao';
+  src: url('../font/XiangJiaoDaJiangJunLingGanTi-2.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rainbow';
+  src: url('@/assets/font/Rainbow-Party-2.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Yuzhou';
+  src: url('../font/YuZhouBaiRiMeng-2.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rabit';
+  src: url('../font/YiZhiKeAiDeXiaoBaiTu-2.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

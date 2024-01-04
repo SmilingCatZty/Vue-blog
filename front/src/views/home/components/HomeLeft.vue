@@ -74,8 +74,8 @@ onMounted(() => {
   <div class="left-box w-full">
     <!-- 置顶文章 -->
     <main v-if="topBlogList.length">
-      <van-divider :style="{ fontSize: '24px', color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">
-        置顶文章
+      <van-divider :style="{ fontSize: '40px', color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">
+        <div :style="{fontFamily: 'Rabit'}">置顶文章</div>
       </van-divider>
       <ul>
         <li
@@ -118,8 +118,8 @@ onMounted(() => {
     </main>
     <!-- 文章列表 -->
     <main v-if="blogList.length">
-      <van-divider :style="{ fontSize: '24px', color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">
-        文章列表
+      <van-divider :style="{ fontSize: '40px', color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }">
+        <div :style="{fontFamily: 'Rabit'}">文章列表</div>
       </van-divider>
       <ul>
         <li

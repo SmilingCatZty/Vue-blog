@@ -96,7 +96,7 @@ onMounted(() => {
         <div class="center-icon w-5 h-5">
           <img :src="nav.icon" alt="" />
         </div>
-        <div class="font-type text-lg mx-1">{{ nav.title }}</div>
+        <div class="text-2xl mx-1">{{ nav.title }}</div>
       </div>
     </div>
     <!-- 导航右侧 -->
@@ -115,18 +115,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@font-face {
-  font-family: 'Rainbow-Party-2';
-  src: url('@/assets/font/Rainbow-Party-2.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Miaomiao';
-  src: url('@/assets/font/Miaomiao.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
 .header {
   box-sizing: border-box;
   padding: 0.25rem;
@@ -137,9 +125,10 @@ onMounted(() => {
   }
 
   .header-center {
+    font-family: Yuzhou;
+    font-weight: 600;
     .items-center {
       border-radius: 15px;
-      font-family: Miaomiao;
     }
 
     .items-center:hover {
@@ -164,6 +153,9 @@ onMounted(() => {
 }
 
 .font-type {
-  font-family: Rainbow-Party-2;
+  font-family: Rainbow;
+}
+.center-type{
+  font-family: Yuzhou;
 }
 </style>

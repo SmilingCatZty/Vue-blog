@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Waves from '@/components/layout/wave.comp.vue'
-import { onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
   title: {
@@ -14,21 +14,19 @@ const props = defineProps({
   }
 })
 
-const route  = useRoute()
+const route = useRoute()
 
 onMounted(() => {
   const urlParams = route.params
-  console.log(urlParams);
-  
+  console.log(urlParams)
 })
-
 </script>
 
 <template>
   <div class="article h-full">
     <header class="article-header relative">
       <div class="header-title fixed">
-        <h1 class="text-4xl text-slate-100">{{ props.title }}</h1>
+        <h1 class="text-8xl text-slate-100 font-type text-center">{{ props.title }}</h1>
       </div>
       <img class="header-img fixed" :src="props.background" alt="" />
       <Waves />
@@ -63,5 +61,8 @@ onMounted(() => {
     z-index: 5;
     overflow: hidden;
   }
+}
+.font-type {
+  font-family: YuZhou;
 }
 </style>

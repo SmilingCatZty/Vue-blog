@@ -4,8 +4,7 @@ import Waves from '@/components/layout/wave.comp.vue'
 
 const mdValue = ref<any>('2133211234567')
 
-const articleImage: string =
-  'http://43.138.109.120:9000/avatar/765664a8a75211296a9cd89671d6d660.png'
+const articleImage: string = 'http://43.138.109.120:9000/avatar/765664a8a75211296a9cd89671d6d660.png'
 
 const articleInfo = ref<any>({
   title: '我是顶部文章1',

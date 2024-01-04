@@ -4,7 +4,6 @@ import { blogApi } from '@/api/modules/blog'
 import { useRoute } from 'vue-router'
 import type { BlogInfoModel } from '@/models/blog.model'
 import PageBox from '@/components/layout/pageBox.comp.vue'
-import UploadFile from '@/components/layout/UploadFile.comp.vue'
 
 const route = useRoute()
 const mdValue = ref<any>('2133211234567')
@@ -23,6 +22,11 @@ const articleInfo = ref<BlogInfoModel>({
   create_time: new Date()
 })
 
+const titleList = ref<any[]>([])
+const mdRef = ref<any>(null)
+const currentIndex = ref<number>(0)
+const showFixedBox = ref<boolean>(false)
+
 const getBlogInfo = async () => {
   try {
     const { status, data } = await blogApi.getBlogDetail(route.params.blog_id as string)
@@ -35,9 +39,32 @@ const getBlogInfo = async () => {
   }
 }
 
-const uploadParsingSuccess = (file: any) => {
-  console.log('file', file)
-  mdValue.value = file
+const getTitles = () => {
+  const anchors = mdRef.value.$el.querySelectorAll('h2')
+  const titles = Array.from(anchors).filter((t: any) => !!t.innerText.trim())
+  if (!titles.length) titleList.value = []
+  const hTags = Array.from(new Set(titles.map((t: any) => t.tagName))).sort()
+  titleList.value = titles.map((el: any, idx: number) => {
+    return {
+      title: el.innerText,
+      lineIndex: el.getAttribute('data-v-md-line'),
+      indent: hTags.indexOf(el.tagName)
+    }
+  })
+}
+
+const handleAnchorClick = (anchor: any, idx: number) => {
+  const heading = mdRef.value.$el.querySelector(`[data-v-md-line="${anchor.lineIndex}"]`)
+  if (heading) {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: heading.offsetTop + window.innerHeight * 0.75
+    })
+  }
+}
+
+const handleScroll = (): void => {
+  window.pageYOffset >= window.innerHeight * 0.75 ? (showFixedBox.value = true) : (showFixedBox.value = false)
 }
 
 watch(
@@ -48,16 +75,49 @@ watch(
     }
   }
 )
-onMounted(() => {
-  getBlogInfo()
+
+onMounted(async () => {
+  window.addEventListener('scroll', handleScroll)
+  await getBlogInfo()
+  getTitles()
 })
 </script>
 
 <template>
   <div class="article h-full">
     <PageBox :title="articleInfo.blog_title" :background="articleInfo.blog_background">
-      <UploadFile @parsingSuccess="uploadParsingSuccess"></UploadFile>
-      <v-md-editor v-model="mdValue" mode="preview"></v-md-editor>
+      <main class="flex justify-between flex-row">
+        <!-- markdown预览 -->
+        <div class="w-full flex-1 mr-3">
+          <v-md-editor
+            ref="mdRef"
+            :default-show-toc="false"
+            :toc-nav-position-right="true"
+            :default-fullscreen="false"
+            v-model="mdValue"
+            mode="preview"
+          />
+        </div>
+        <!-- 导航栏 -->
+        <div :style="{ width: '200px', height: 'auto' }">
+          <div
+            class="adticle-detail-nav top-1 bg-white p-3 mr-3"
+            :style="{ width: '200px', position: showFixedBox ? 'fixed' : 'static' }"
+          >
+            <div class="text-xl font-medium">目录导航</div>
+            <div
+              class="catalog-item"
+              v-for="(anchor, index) of titleList"
+              :key="anchor.title"
+              :class="currentIndex === index ? 'active' : ''"
+              :style="{ paddingLeft: `${5 + anchor.indent * 15}px` }"
+              @click="handleAnchorClick(anchor, index)"
+            >
+              <a>{{ anchor.title }}</a>
+            </div>
+          </div>
+        </div>
+      </main>
     </PageBox>
   </div>
 </template>
@@ -82,5 +142,14 @@ onMounted(() => {
     z-index: 5;
     overflow: hidden;
   }
+}
+.v-md-editor {
+  :deep(.v-md-editor__left-area) {
+    display: inline-block !important;
+    padding: 10px;
+  }
+}
+.adticle-detail-nav {
+  border-radius: 10px;
 }
 </style>

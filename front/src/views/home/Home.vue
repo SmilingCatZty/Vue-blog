@@ -131,10 +131,6 @@ onMounted(() => {
       display: flex;
       flex-wrap: wrap;
     }
-
-    .main-right-fixed {
-      position: fixed;
-    }
   }
 }
 
