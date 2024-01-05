@@ -92,5 +92,25 @@ export const blogApi = {
       method: 'get',
       params: { year, month }
     })
+  },
+
+  /**
+   * 文章发布统计
+   */
+  getArticlePublication: () => {
+    return requester({
+      url: `blog/publication`,
+      method: 'get'
+    })
+  },
+
+  /**
+   * 标签统计
+   */
+  getArticleForTag: () => {
+    return requester({
+      url: `blog/tag`,
+      method: 'get'
+    })
   }
 }
