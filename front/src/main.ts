@@ -19,9 +19,10 @@ import {
   Divider
 } from 'vant'
 
-import './assets/css/main.css'
 // tailwindCss
 import './assets/css/tailwind.css'
+// main.css
+import './assets/css/main.css'
 // vant
 import 'vant/lib/index.css'
 

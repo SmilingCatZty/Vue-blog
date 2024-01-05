@@ -14,7 +14,7 @@
   /* cursor: pointer; */
 }
 
-body{
+body {
   cursor: url(../pointer/comix-pointer.cur), default;
 }
 
@@ -48,4 +48,53 @@ ul {
 }
 li {
   /* width: 100%; */
+}
+
+table {
+  border-collapse: separate;
+  text-indent: initial;
+  border-spacing: 2px;
+}
+
+pre {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0.5em !important;
+  overflow-x: auto !important;
+  white-space: pre-wrap !important;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+td {
+  display: table-cell;
+  text-align: left;
+  vertical-align: top;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #f8f8f8;
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: bold; /* 粗体 */
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+  font-weight: bold; /* 粗体 */
+}
+
+h3 {
+  font-size: 1.75rem; /* 28px */
+  font-weight: bold; /* 粗体 */
+}
+
+h4 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: bold; /* 粗体 */
 }

@@ -162,7 +162,7 @@ onMounted(() => {
       </ul>
     </main>
   </div>
-  <div class="text-center w-full p-2">
+  <div v-if="total > 0" class="text-center w-full p-2">
     <Pagination :total="total" :size="pageParams.size" @pageHandle="pageHandle" />
   </div>
 </template>

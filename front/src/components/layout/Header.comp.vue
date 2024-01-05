@@ -35,13 +35,13 @@ const navList = ref<any>([
   {
     title: '统计',
     icon: SvgIcons.get('graph')?.icon,
-    path: '',
+    path: 'statistics',
     child: []
   },
   {
     title: '友链',
     icon: SvgIcons.get('link')?.icon,
-    path: 'link',
+    path: 'friend-link',
     child: []
   }
 ])
