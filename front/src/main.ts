@@ -16,7 +16,8 @@ import {
   Picker,
   Switch,
   Notify,
-  Divider
+  Divider,
+  Popover
 } from 'vant'
 
 // tailwindCss
@@ -55,7 +56,8 @@ const vantArr: any[] = [
   Picker,
   Switch,
   Notify,
-  Divider
+  Divider,
+  Popover
 ]
 
 VMdEditor.use(githubTheme, {

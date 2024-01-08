@@ -2,11 +2,13 @@
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { SvgIcons } from '@/libs/svg-icon.map'
+import { showToast } from 'vant'
 
 const route = useRoute()
 const router = useRouter()
 
 const showHeader = ref<boolean>(true)
+const showPopover = ref<any>([])
 const navHeader = ref<any>(null)
 let navTop = ref<number>(0)
 const navList = ref<any>([
@@ -21,27 +23,24 @@ const navList = ref<any>([
     icon: SvgIcons.get('document')?.icon,
     path: 'article',
     child: [
-      { title: '归档', icon: '', path: '' },
-      { title: '分类', icon: '', path: '' },
-      { title: '标签', icon: '', path: '' }
+      { title: '归档', icon: '', path: 'article' },
+      { title: '分类', icon: '', path: 'article-type' },
+      { title: '标签', icon: '', path: 'article-label' }
     ]
   },
   {
-    title: '娱乐',
-    icon: SvgIcons.get('game')?.icon,
-    path: '',
-    child: []
+    title: '社交',
+    icon: SvgIcons.get('link')?.icon,
+    path: 'social',
+    child: [
+      { title: '留言板', icon: '', path: 'social/board' },
+      { title: '友链', icon: '', path: 'social' }
+    ]
   },
   {
     title: '统计',
     icon: SvgIcons.get('graph')?.icon,
     path: 'statistics',
-    child: []
-  },
-  {
-    title: '友链',
-    icon: SvgIcons.get('link')?.icon,
-    path: 'friend-link',
     child: []
   }
 ])
@@ -70,8 +69,27 @@ const navClickHandle = (nav: any) => {
   router.push(`/${nav.path}`)
 }
 
+const onSelect = (action: any) => {
+  showToast(action.text)
+}
+
 const goHome = () => {
   router.push('/home')
+}
+
+const mouseHandle = (idx: number) => {
+  // showPopover.value[idx] = true
+  for (let index = 0; index < navList.value.length; index++) {
+    if (idx === index && idx !== 0 && idx !== navList.value.length - 1) {
+      showPopover.value[index] = true
+    } else {
+      showPopover.value[index] = false
+    }
+  }
+}
+
+const mouseleave = (idx: number) => {
+  showPopover.value[idx] = false
 }
 
 onMounted(() => {
@@ -86,17 +104,36 @@ onMounted(() => {
       <div @click="goHome()">Smiling cat</div>
     </div>
     <!-- 导航中部 -->
-    <div class="header-center flex flex-1 justify-center items-center">
+    <div class="header-center flex flex-1 justify-center">
       <div
-        class="items-center flex p-2 cursor-pointer"
+        class="item-center p-2 cursor-pointer flex items-center"
         v-for="(nav, index) in navList"
         :key="index"
         @click="navClickHandle(nav)"
+        @mouseenter="mouseHandle(index)"
       >
-        <div class="center-icon w-5 h-5">
-          <img :src="nav.icon" alt="" />
-        </div>
-        <div class="text-2xl mx-1">{{ nav.title }}</div>
+        <van-popover
+          v-model:show="showPopover[index]"
+          :trigger="'manual'"
+          :actions="nav.child"
+          @select="onSelect"
+          @mouseleave="mouseleave(index)"
+        >
+          <template #reference>
+            <!-- <van-button type="primary">浅色风格</van-button> -->
+            <div class="items-center flex justify-center">
+              <div class="center-icon w-5 h-5">
+                <img :src="nav.icon" alt="" />
+              </div>
+              <div class="text-2xl mx-1">{{ nav.title }}</div>
+            </div>
+          </template>
+          <div v-for="(child, i) in nav.child" :key="i" @click="navClickHandle(child)" class="header-popupover">
+            <div class="popupover-context w-32 h-10 flex justify-center items-center cursor-pointer">
+              {{ child.title }}
+            </div>
+          </div>
+        </van-popover>
       </div>
     </div>
     <!-- 导航右侧 -->
@@ -127,14 +164,24 @@ onMounted(() => {
   .header-center {
     font-family: Yuzhou;
     font-weight: 600;
-    .items-center {
+    .item-center {
       border-radius: 15px;
     }
 
-    .items-center:hover {
+    .item-center:hover {
       background-color: rgba($color: #000000, $alpha: 0.1);
     }
   }
+}
+
+.popupover-context{
+  background-color: rgba($color: #b6beeb, $alpha: .6) ;
+}
+.popupover-context:hover {
+  background-color: rgba($color: #a8b4f6, $alpha: .7) ;
+}
+.header-popupover + .header-popupover {
+  border-top: 1px solid #c9cff0;
 }
 
 .header-top {
@@ -155,7 +202,7 @@ onMounted(() => {
 .font-type {
   font-family: Rainbow;
 }
-.center-type{
+.center-type {
   font-family: Yuzhou;
 }
 </style>

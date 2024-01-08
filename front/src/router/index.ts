@@ -33,8 +33,8 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/article/ArticleDetail.vue')
   },
   {
-    path: '/friend-link',
-    name: 'friend-link',
+    path: '/social',
+    name: 'social',
     component: () => import('@/views/friend-link/FriendLink.vue')
   },
   {
